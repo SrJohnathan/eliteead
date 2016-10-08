@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/animacao"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        android:elevation="10dp">
+
+        <com.daimajia.swipe.SwipeLayout xmlns:swipe="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/swipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md_white_1000"
+            swipe:leftEdgeSwipeOffset="0dp"
+            swipe:rightEdgeSwipeOffset="0dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/notas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/btvermelhorect"
+                    android:text="Notas"
+                    android:textColor="@color/md_white_1000" />
+
+
+                <Button
+                    android:id="@+id/conteudo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/btverderect"
+                    android:text="Conteudo"
+                    android:textColor="@color/md_white_1000" />
+
+                <Button
+                    android:id="@+id/btprova"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/botaoface"
+                    android:src="@drawable/ic_login"
+                    android:text="  Questionários  "
+                    android:textColor="@color/md_white_1000" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="5dp">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/puxa"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+
+                        />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/img"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="15dp"
+                        android:src="@drawable/com_facebook_profile_picture_blank_portrait" />
+
+                    <ead.elite.app.br.com.appelite.ead.componets.MyTextViewArial
+                        android:id="@+id/titulo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_toLeftOf="@+id/donut_progress"
+                        android:layout_toRightOf="@+id/img"
+                        android:text="titulos"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/colorPrimary" />
+
+
+
+
+
+
+
+                    <com.github.lzyzsd.circleprogress.CircleProgress xmlns:custom="http://schemas.android.com/tools"
+                        android:id="@+id/donut_progress"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/puxa"
+                        custom:circle_finished_color="#ff0000"
+                        custom:circle_progress="90"
+                        custom:circle_text_color="@color/cardview_dark_background"
+                        custom:circle_unfinished_color="@color/colorPrimaryLight" />
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </com.daimajia.swipe.SwipeLayout>
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

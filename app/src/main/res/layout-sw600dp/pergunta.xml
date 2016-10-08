@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    style="@style/FacebookLoginButton"
+    android:layout_height="wrap_content">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="1dp"
+        android:background="@color/md_white_1000">
+
+        <ead.elite.app.br.com.appelite.ead.componets.MyTextViewArial
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Questao 1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/questao"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aviso"
+            android:id="@+id/pergunta"
+            android:layout_margin="5dp"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/group">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/res1"
+                android:text="(A)"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/res2"
+                android:text="(B)"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/res3"
+
+                android:text="(C)"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/res4"
+
+                android:text="(D)"/>
+
+        </RadioGroup>
+
+        <ead.elite.app.br.com.appelite.ead.componets.Fita
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_gravity="right"
+            android:id="@+id/pontos"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="20dp"
+            android:text="2Pts"/>
+
+
+        
+        
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

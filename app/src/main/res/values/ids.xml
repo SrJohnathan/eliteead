@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="menufab" type="id"/>
+    <item name="fab2" type="id"/>
+    <item name="fab3" type="id"/>
+    <item name="fab4" type="id"/>
+    <item name="fab5" type="id"/>
+    <item name="textfab" type="id"/>
+</resources>

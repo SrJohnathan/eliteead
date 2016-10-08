@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Elite Educação</string>
+    <string name="facebook_app_id">191061277934284</string>
+    <string name="aviso">    Você terá 30 minutos para terminar a prova, se o tempo acabar  ficara com as questões resolvida e 2 chances de obter media 7    </string>
+    <string name="textocompra"> Clique no botão verde para continuar com compra e seguir passo a passo de acordo com as diretrizes.</string>
+    <string name="descricao">Esse curso deve ser oferido a alunos que busquem conhecimento na área de informática. É um curso completo onde o aluno, além de aprender a utilizar o sistema operacional mais utilizado no mundo, também se especializará no pacote Office, softwares utilizados para a criação de sites e manipulação tridimensional de imagens e animações, além de aprender técnicas básicas no desenvolvimento de softwares.</string>
+</resources>

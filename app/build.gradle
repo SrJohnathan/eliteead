@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'eadElite'
+            keyPassword '9569john'
+            storeFile file('C:/Users/Pc/Desktop/eadapp.jks')
+            storePassword '9569john'
+        }
+    }
+    compileSdkVersion 24
+    buildToolsVersion '24.0.1'
+    defaultConfig {
+        applicationId "ead.elite.app.br.com.appelite.ead"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+    }
+    dexOptions {
+        incremental true
+    }
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+    mavenLocal()
+    maven {
+
+        url "https://raw.github.com/pagseguro/android/mvn-repo/"
+    }
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile('com.mikepenz:materialdrawer:4.6.4@aar') {
+        transitive = true
+    }
+    compile files('libs/YouTubeAndroidPlayerApi.jar')
+    compile 'com.android.volley:volley:1.0.0'
+    compile 'com.google.code.gson:gson:2.4'
+    compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.mikepenz:iconics-core:2.5.5@aar'
+    compile 'com.mikepenz:material-design-iconic-typeface:2.2.0.1@aar'
+    compile 'com.mikepenz:fontawesome-typeface:4.5.0.1@aar'
+    compile 'com.mikepenz:community-material-typeface:1.3.41.1@aar'
+    compile 'br.com.uol.ps:library:0.8'
+    compile 'com.facebook.android:facebook-android-sdk:4.10.0'
+    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
+    compile 'com.github.lzyzsd:circleprogress:1.1.0@aar'
+    compile 'com.daimajia.androidanimations:library:1.1.3@aar'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.easing:library:1.0.1@aar'
+    compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'com.google.firebase:firebase-messaging:9.0.2'
+    compile 'com.google.firebase:firebase-core:9.0.2'
+    compile 'com.afollestad.material-dialogs:commons:0.8.5.8'
+    compile 'com.daimajia.slider:library:1.1.5@aar'
+    compile 'com.github.traex.rippleeffect:library:1.3'
+    compile 'com.github.barteksc:android-pdf-viewer:1.1.1'
+    compile 'com.facebook.fresco:fresco:0.11.0'
+    compile 'com.android.support:appcompat-v7:24.1.1'
+    compile 'com.android.support:support-v4:24.1.1'
+    compile 'com.android.support:support-v13:24.1.1'
+    compile 'com.android.support:cardview-v7:24.1.1'
+    compile 'com.android.support:recyclerview-v7:24.1.1'
+    compile 'com.android.support:design:24.1.1'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'fm.jiecao:jiecaovideoplayer:4.6.5'
+
+
+}
+apply plugin: 'com.google.gms.google-services'
