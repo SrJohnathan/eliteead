@@ -742,7 +742,7 @@ public class AtividadeTabs extends AppCompatActivity {
                             @Override
                             public void geJsonObject(JSONObject jsonObject) {
 
-                                Log.i("LOG", "" + jsonObject);
+
                                 try {
                                     JSONObject object = jsonObject.getJSONObject("0");
 
