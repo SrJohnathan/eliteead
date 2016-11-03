@@ -34,10 +34,12 @@ public class AdapterMensagem extends RecyclerView.Adapter<AdapterMensagem.Myview
     private OnClickFrag onClickFrag;
 
 
+
     public AdapterMensagem(Context context , List<Mesagem> list) {
         this.context = context;
         this.list = list;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
 
     }
 

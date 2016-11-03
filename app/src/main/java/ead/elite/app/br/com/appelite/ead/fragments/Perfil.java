@@ -392,7 +392,6 @@ public class Perfil extends Fragment implements View.OnClickListener {
                         @Override
                         public void Saida() {
 
-                            getActivity().getFragmentManager().beginTransaction().remove(Perfil.this).commit();
                         }
                     });
                 } else {
@@ -559,7 +558,7 @@ public class Perfil extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void onDismissed(Snackbar snackbar, int event) {
                                     super.onDismissed(snackbar, event);
-                                    snack.Saida();
+
                                 }
 
                                 @Override

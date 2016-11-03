@@ -16,12 +16,13 @@ public class Dados {
         editor = preferences.edit();
     }
 
-    public void setDados( int id,String email, String nome, String idface, String urlfoto, boolean estado) {
+    public void setDados( int id,String email, String nome,String telefone, String idface, String urlfoto, boolean estado) {
         editor.clear();
         editor.putInt("2454", id);
         editor.putString("245", email);
         editor.putString("1452", nome);
         editor.putString("1453", idface);
+        editor.putString("1485", telefone);
         editor.putString("1454", urlfoto);
         editor.putBoolean("12", estado);
 

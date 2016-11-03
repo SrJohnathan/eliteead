@@ -57,9 +57,10 @@
             android:id="@+id/toobarPai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:title="ggggg"
             android:background="@color/md_light_blue_600"
             android:minHeight="?attr/actionBarSize"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            app:theme="@style/Theme.AppCompat.NoActionBar"/>
 
 
         <android.support.v7.widget.RecyclerView

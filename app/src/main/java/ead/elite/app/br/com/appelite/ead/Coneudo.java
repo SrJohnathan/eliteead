@@ -238,7 +238,8 @@ public class Coneudo extends AppCompatActivity {
 
                     case R.id.video :
                         dialog.hide();
-                        JCVideoPlayerStandard.startFullscreen(Coneudo.this, JCVideoPlayerStandard.class, "http://callmenick.com/_development/html5-video/media/demo.mp4", "嫂子辛苦了");
+                      //  JCVideoPlayerStandard.startFullscreen(Coneudo.this, JCVideoPlayerStandard.class, "http://callmenick.com/_development/html5-video/media/demo.mp4", "嫂子辛苦了");
+                        Snackbar.make(webView,"Conteúdo indisponível",Snackbar.LENGTH_SHORT).show();
 
                         break;
 

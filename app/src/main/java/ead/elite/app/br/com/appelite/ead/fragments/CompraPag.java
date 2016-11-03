@@ -61,7 +61,6 @@ public class CompraPag extends Fragment {
     private TextView descricao, sumario, titulo, horas, categoria, publico, preco, instrutor;
     private ImageView imageView, instru;
     private Curso curso;
-    private String cpf;
     private String tele;
 
 
@@ -178,13 +177,12 @@ public class CompraPag extends Fragment {
                                                 getPheferencias();
                                                 PagSeguro.pay(new PagSeguroRequest()
                                                                 .withNewItem(strtext.getNome(), quantityParcel, amount)
-                                                                .withVendorEmail("seu email cadastrado no pagseguro")
+                                                                .withVendorEmail("carlosaguiar2005@gmail.com")
                                                                 .withBuyerEmail(emailll)
-                                                                 .withBuyerCPF(cpf)
-                                                                    .withBuyerCellphoneNumber("55" + numer)
-                                                                .withReferenceCode("123")
+                                                                .withBuyerCellphoneNumber("55" + "")
+                                                                .withReferenceCode("12583")
                                                                 .withEnvironment(PagSeguro.Environment.PRODUCTION)
-                                                                .withAuthorization("seu email de login no pagseguro", "codigo obtido no pagseguro.uol.com.br"),
+                                                                .withAuthorization("carlosaguiar2005@gmail.com", "C3218244827F4A3C9E645B856097327F"),
 
                                                         getActivity(),
                                                         R.id.relativ,

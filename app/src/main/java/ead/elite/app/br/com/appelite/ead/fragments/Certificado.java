@@ -20,22 +20,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import br.com.uol.ps.library.PagSeguro;
+import br.com.uol.ps.library.PagSeguroRequest;
+import br.com.uol.ps.library.PagSeguroResponse;
 import ead.elite.app.br.com.appelite.ead.R;
 import ead.elite.app.br.com.appelite.ead.adapter.AdapterCertificado;
 import ead.elite.app.br.com.appelite.ead.bd.Dados;
@@ -59,6 +67,7 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
     public static final int REQUESTPERMISSION = 55;
     public static final int REQUESTPERMISSI = 45;
     private int position;
+    private String emailll;
     private ProgressBar progressBar;
     private TextView connection;
 
@@ -74,7 +83,7 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
         connection = (TextView) view.findViewById(R.id.error);
         progressBar.setVisibility(View.VISIBLE);
 
-        connection.setCompoundDrawables(new IconicsDrawable(getActivity()).sizeDp(30).color(Color.LTGRAY).icon(CommunityMaterial.Icon.cmd_alert_circle),null,null,null);
+        connection.setCompoundDrawables(new IconicsDrawable(getActivity()).sizeDp(30).color(Color.LTGRAY).icon(CommunityMaterial.Icon.cmd_alert_circle), null, null, null);
         connection.setText("  Verifique sua Conexão com a Internet");
 
         list = new ArrayList<>();
@@ -82,11 +91,11 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
         HashMap<String, String> map = new HashMap<>();
         map.put("user", iduser + "");
         map.put("certi", "get");
-        Conexao.Conexao(getActivity(), Config.DOMIONIO+"/php/request/certificado.php", map, new DadosVolley() {
+        Conexao.Conexao(getActivity(), Config.DOMIONIO + "/php/request/certificado.php", map, new DadosVolley() {
             @Override
             public void geJsonObject(JSONObject jsonObject) {
 
-                Log.i("LOG",""+jsonObject);
+                Log.i("LOG", "" + jsonObject);
                 for (int i = 0; i < jsonObject.length(); i++) {
                     try {
                         JSONObject object = jsonObject.getJSONObject("" + i);
@@ -99,10 +108,10 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
                             String hora = object.getString("hora");
                             boolean baixou = object.getBoolean("baixou");
 
-                            Certificados certificados = new Certificados(id, nome, nota, hora, datap, data,baixou);
+                            Certificados certificados = new Certificados(id, nome, nota, hora, datap, data, baixou);
                             list.add(certificados);
                         } else if (object.has("nada")) {
-                            connection.setText("  "+object.getString("nada"));
+                            connection.setText("  " + object.getString("nada"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -110,20 +119,19 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
                 }
 
 
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    if (FragmentCompat.shouldShowRequestPermissionRationale(Certificado.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
-                if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-                    if(FragmentCompat.shouldShowRequestPermissionRationale(Certificado.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-
-                    }else {
-                        FragmentCompat.requestPermissions(Certificado.this,new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUESTPERMISSI);
+                    } else {
+                        FragmentCompat.requestPermissions(Certificado.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUESTPERMISSI);
                     }
-                }else {
+                } else {
                     certificado = new AdapterCertificado(getActivity(), list);
-                    if(list.size() == 0){
+                    if (list.size() == 0) {
                         connection.setVisibility(View.VISIBLE);
                         progressBar.setVisibility(View.GONE);
 
-                    }else {
+                    } else {
                         recyclerView.setAdapter(certificado);
                         progressBar.setVisibility(View.GONE);
                         connection.setVisibility(View.GONE);
@@ -131,9 +139,7 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
                     }
 
 
-
                 }
-
 
 
             }
@@ -163,6 +169,7 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
         SharedPreferences preferences = getActivity().getSharedPreferences(Dados.LOGIN_NAME, Context.MODE_PRIVATE);
         iduser = preferences.getInt("2454", iduser);
         estado = preferences.getBoolean("12", estado);
+        emailll = preferences.getString("245", "");
     }
 
     @Override
@@ -171,8 +178,8 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
         position = positon;
 
         String youFilePath = Environment.getExternalStorageDirectory().toString() + "/EliteEad";
-        File file = new File(youFilePath,  list.get(positon).getNome() + ".pdf");
-        if (file.exists()  == true ) {
+        File file = new File(youFilePath, list.get(positon).getNome() + ".pdf");
+        if (file.exists() == true) {
             View view1 = View.inflate(getActivity(), R.layout.pdfview, null);
             MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
                     .customView(view1, false);
@@ -182,25 +189,22 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
 
 
             dialog.show();
-        } else if (file.exists()  == false ) {
+        } else if (file.exists() == false) {
 
-            if(ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-                if(FragmentCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+            if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (FragmentCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
-                }else {
-                    FragmentCompat.requestPermissions(this,new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUESTPERMISSION);
+                } else {
+                    FragmentCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUESTPERMISSION);
                 }
-            }else {
+            } else {
 
-                if(!list.get(positon).isBaixou()){
+                if (!list.get(positon).isBaixou()) {
 
-                    String url = Config.DOMIONIO+"/php/pdf/pdf.php?certi=854125896589&curso=" + list.get(position).getId() + "&user=" + iduser + "";
-                    GetDownloads downloads = new GetDownloads(getActivity(), url, "Certificado"
-                            , "Certificado do Curso " + list.get(position).getNome(), list.get(position).getNome());
-                    downloads.downloadManager();
-                }else {
+                    compra();
+                } else {
 
-                     snackbar = Snackbar.make(view,"Este arquivo já foi Baixado",Snackbar.LENGTH_SHORT).setAction("OK!", new View.OnClickListener() {
+                    snackbar = Snackbar.make(view, "Este arquivo já foi Baixado", Snackbar.LENGTH_SHORT).setAction("OK!", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             snackbar.dismiss();
@@ -222,21 +226,19 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        switch (requestCode){
-            case REQUESTPERMISSION :
-                for (int i = 0;i < permissions.length;i++){
-                    if(permissions[i].equalsIgnoreCase(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                            && grantResults[i] == PackageManager.PERMISSION_GRANTED){
+        switch (requestCode) {
+            case REQUESTPERMISSION:
+                for (int i = 0; i < permissions.length; i++) {
+                    if (permissions[i].equalsIgnoreCase(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            && grantResults[i] == PackageManager.PERMISSION_GRANTED) {
 
-                        if(!list.get(position).isBaixou()){
+                        if (!list.get(position).isBaixou()) {
 
-                            String url = Config.DOMIONIO+"/php/pdf/pdf.php?certi=854125896589&curso=" + list.get(position).getId() + "&user=" + iduser + "";
-                            GetDownloads downloads = new GetDownloads(getActivity(), url, "Certificado"
-                                    , "Certificado do Curso " + list.get(position).getNome(), list.get(position).getNome());
-                            downloads.downloadManager();
-                        }else {
+                            compra();
 
-                            snackbar = Snackbar.make(view,"Este arquivo já foi Baixado",Snackbar.LENGTH_LONG).setAction("OK!", new View.OnClickListener() {
+                        } else {
+
+                            snackbar = Snackbar.make(view, "Este arquivo já foi Baixado", Snackbar.LENGTH_LONG).setAction("OK!", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
                                     snackbar.dismiss();
@@ -253,17 +255,17 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
                 }
                 break;
 
-            case  REQUESTPERMISSI :
-                for (int i = 0;i < permissions.length;i++){
-                    if(permissions[i].equalsIgnoreCase(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                            && grantResults[i] == PackageManager.PERMISSION_GRANTED){
+            case REQUESTPERMISSI:
+                for (int i = 0; i < permissions.length; i++) {
+                    if (permissions[i].equalsIgnoreCase(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            && grantResults[i] == PackageManager.PERMISSION_GRANTED) {
 
                         certificado = new AdapterCertificado(getActivity(), list);
-                        if(list.size() == 0){
-                            connection.setCompoundDrawables(new IconicsDrawable(getActivity()).sizeDp(30).color(Color.LTGRAY).icon(CommunityMaterial.Icon.cmd_alert_circle),null,null,null);
+                        if (list.size() == 0) {
+                            connection.setCompoundDrawables(new IconicsDrawable(getActivity()).sizeDp(30).color(Color.LTGRAY).icon(CommunityMaterial.Icon.cmd_alert_circle), null, null, null);
                             connection.setVisibility(View.VISIBLE);
                             connection.setText("  Verifique sua Conexão com a Internet");
-                        }else {
+                        } else {
                             recyclerView.setAdapter(certificado);
                             progressBar.setVisibility(View.GONE);
                             certificado.setClick(Certificado.this);
@@ -282,4 +284,55 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
     public void onStart() {
         super.onStart();
     }
+
+    public void compra() {
+
+        BigDecimal amount = new BigDecimal("39.90");
+        //quantidade de parcelas
+
+
+        int quantityParcel = 1;
+        getPheferencias();
+        PagSeguro.pay(new PagSeguroRequest()
+                        .withNewItem(list.get(position).getNome(), quantityParcel, amount)
+                        .withVendorEmail("carlosaguiar2005@gmail.com")
+                        .withBuyerEmail(emailll)
+                        .withBuyerCellphoneNumber("55" + "")
+                        .withReferenceCode("12583")
+                        .withEnvironment(PagSeguro.Environment.PRODUCTION)
+                  .withAuthorization("carlosaguiar2005@gmail.com", "C3218244827F4A3C9E645B856097327F"),
+
+
+                getActivity(),
+                R.id.relative,
+                new PagSeguro.PagSeguroListener() {
+                    @Override
+                    public void onSuccess(PagSeguroResponse response, Context context) {
+
+                        if(response.isSuccess()){
+
+                            String url = Config.DOMIONIO + "/php/pdf/pdf.php?certi=854125896589&curso=" + list.get(position).getId() + "&user=" + iduser + "";
+                            GetDownloads downloads = new GetDownloads(getActivity(), url, "Certificado"
+                                    , "Certificado do Curso " + list.get(position).getNome(), list.get(position).getNome());
+                            downloads.downloadManager();
+
+                        }
+
+
+
+                        Toast.makeText(context, " pagamento aprovado! ", Toast.LENGTH_LONG).show();
+                        Log.i("LOG",response+"");
+                    }
+
+                    @Override
+                    public void onFailure(PagSeguroResponse response, Context context) {
+                        Toast.makeText(context, "FALHA no pagamento! ", Toast.LENGTH_LONG).show();
+                        Log.i("LOG",response+"");
+                    }
+                });
+
+    }
+
+
 }
+

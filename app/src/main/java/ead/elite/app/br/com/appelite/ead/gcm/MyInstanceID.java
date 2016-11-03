@@ -54,21 +54,14 @@ public class MyInstanceID extends FirebaseInstanceIdService {
             HashMap<String,String> hashMap = new HashMap<>();
             hashMap.put("token",token);
             hashMap.put("metodo","insert");
-            Log.i("LOG",token);
+            dados.setDados("5nn",token);
+            dados.Commit();
+
 
             Conexao.Conexao(this, Config.DOMIONIO+"/php/request/token.php", hashMap, new DadosVolley() {
                 @Override
                 public void geJsonObject(JSONObject jsonObject) {
 
-
-                    try {
-                        JSONObject object = jsonObject.getJSONObject("0");
-
-                        dados.setDados("5",object.getString("iddevice"));
-                        dados.Commit();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
                 }
 
                 @Override

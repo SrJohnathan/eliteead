@@ -379,7 +379,7 @@ public class AtividadeTabs extends AppCompatActivity {
 
 
         PrimaryDrawerItem item5 = new PrimaryDrawerItem().withName("Sobre").withIcon(
-                new IconicsDrawable(this).icon(FontAwesome.Icon.faw_archive).sizeDp(30).color(Color.LTGRAY));
+                new IconicsDrawable(this).icon(FontAwesome.Icon.faw_wrench).sizeDp(30).color(Color.LTGRAY));
         PrimaryDrawerItem item6 = new PrimaryDrawerItem().withName("Facebook").withIcon(
                 new IconicsDrawable(this).icon(MaterialDesignIconic.Icon.gmi_facebook_box).sizeDp(30).color(Color.LTGRAY));
         PrimaryDrawerItem item7 = new PrimaryDrawerItem().withName("Site").withIcon(
@@ -612,7 +612,8 @@ public class AtividadeTabs extends AppCompatActivity {
                             map.put("metodo", "facebook");
                             map.put("idface", id);
                             map.put("email", email);
-                            map.put("token", CoreId.getPheferencias(AtividadeTabs.this, "5"));
+                            map.put("token", CoreId.getPheferencias(AtividadeTabs.this, "5nn"));
+
                             Conexao.Conexao(AtividadeTabs.this, Config.DOMIONIO + "/php/request/login_cadas.php", map, new DadosVolley() {
                                 @Override
                                 public void geJsonObject(JSONObject jsonObject) {
@@ -626,7 +627,7 @@ public class AtividadeTabs extends AppCompatActivity {
                                             profileDrawerItem.withEmail(email);
                                             header.updateProfile(profileDrawerItem);
 
-                                            dados.setDados(idaluno, email, name, id, profile1.getProfilePictureUri(100, 100).toString(), true);
+                                            dados.setDados(idaluno, email, name,"", id, profile1.getProfilePictureUri(100, 100).toString(), true);
                                             dados.Commit();
                                             estado = true;
                                             NetDados netDados = new NetDados(AtividadeTabs.this);
@@ -728,7 +729,7 @@ public class AtividadeTabs extends AppCompatActivity {
 
                         HashMap<String, String> map = new HashMap<String, String>();
                         map.put("metodo", "login");
-                        map.put("token", CoreId.getPheferencias(AtividadeTabs.this, "5"));
+                        map.put("token", CoreId.getPheferencias(AtividadeTabs.this, "5nn"));
                         map.put("email", email.getText().toString());
                         map.put("senha", senha.getText().toString());
                         dialogview.dismiss();
@@ -741,15 +742,16 @@ public class AtividadeTabs extends AppCompatActivity {
                             @Override
                             public void geJsonObject(JSONObject jsonObject) {
 
-
+                                Log.i("LOG", "" + jsonObject);
                                 try {
                                     JSONObject object = jsonObject.getJSONObject("0");
 
                                     int id = object.getInt("idaluno");
                                     String user = object.getString("username");
                                     String email = object.getString("email");
+                                    String telefone = object.getString("tele");
 
-                                    dados.setDados(id, email, user, null, Config.DOMIONIO + "/php/server/image.php?metodo=aluno&id=" + id, true);
+                                    dados.setDados(id, email, user, telefone ,null, Config.DOMIONIO + "/php/server/image.php?metodo=aluno&id=" + id, true);
                                     dados.Commit();
                                     estado = true;
                                     NetDados netDados = new NetDados(AtividadeTabs.this);

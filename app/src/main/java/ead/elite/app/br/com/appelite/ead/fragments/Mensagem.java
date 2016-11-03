@@ -49,6 +49,7 @@ public class Mensagem extends Fragment {
     private ContextMenu contextMenu;
     private List<Mesagem> mesagems;
     MaterialDialog dialog;
+    private float scala;
 
 
 
@@ -57,6 +58,8 @@ public class Mensagem extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.containertwo, container, false);
+
+        scala = getActivity().getResources().getDisplayMetrics().density;
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -94,7 +97,7 @@ public class Mensagem extends Fragment {
                 ListExcluir excluir = new ListExcluir(getActivity());
                 final ListPopupWindow popupWindow = new ListPopupWindow(getActivity());
                 popupWindow.setAnchorView(view);
-                popupWindow.setWidth(50);
+                popupWindow.setWidth((int) (80 * scala + 0.5f));
                 popupWindow.setAdapter(excluir);
                 popupWindow.setModal(true);
                 popupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {

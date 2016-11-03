@@ -2,6 +2,8 @@ package ead.elite.app.br.com.appelite.ead.gcm;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
@@ -36,7 +38,7 @@ public class GcmLister extends FirebaseMessagingService {
 
         Database database = new Database(getApplicationContext());
 
-        Map map = new HashMap();
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder mBuilder =
@@ -44,6 +46,7 @@ public class GcmLister extends FirebaseMessagingService {
                         .setContentTitle(mesagem.getTitulo())
                         .setSound(defaultSoundUri)
                         .setSmallIcon(R.drawable.logo)
+                        .setLargeIcon(largeIcon)
                         .setContentText(mesagem.getMensagem());
 
         NotificationManager mNotificationManager =
