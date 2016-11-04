@@ -1,15 +1,12 @@
 package ead.elite.app.br.com.appelite.ead.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,18 +14,12 @@ import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.github.lzyzsd.circleprogress.CircleProgress;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
-import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import ead.elite.app.br.com.appelite.ead.Coneudo;
-import ead.elite.app.br.com.appelite.ead.Prova;
 import ead.elite.app.br.com.appelite.ead.R;
-import ead.elite.app.br.com.appelite.ead.componets.ContagemNotification;
-import ead.elite.app.br.com.appelite.ead.componets.MyTextViewArial;
 import ead.elite.app.br.com.appelite.ead.dominio.Conteudo;
 import ead.elite.app.br.com.appelite.ead.interfaces.OnClickFrag;
 import ead.elite.app.br.com.appelite.ead.net.Config;

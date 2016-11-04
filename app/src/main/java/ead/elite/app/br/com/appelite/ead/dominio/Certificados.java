@@ -11,18 +11,24 @@ public class Certificados implements Parcelable {
     private String nome;
     private double nota;
     private String hotas;
+    private boolean pago ;
     private String datap;
     private String dataf;
     private boolean baixou;
 
-    public Certificados(int id, String nome, double nota, String hotas, String datap, String dataf, boolean baixou) {
+    public Certificados(int id, String nome, double nota, String hotas, boolean pago, String datap, String dataf, boolean baixou) {
         this.id = id;
         this.nome = nome;
         this.nota = nota;
         this.hotas = hotas;
+        this.pago = pago;
         this.datap = datap;
         this.dataf = dataf;
         this.baixou = baixou;
+    }
+
+    public boolean isPago() {
+        return pago;
     }
 
     protected Certificados(Parcel in) {

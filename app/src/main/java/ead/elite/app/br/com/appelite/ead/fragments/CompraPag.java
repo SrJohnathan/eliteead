@@ -179,7 +179,7 @@ public class CompraPag extends Fragment {
                                                                 .withNewItem(strtext.getNome(), quantityParcel, amount)
                                                                 .withVendorEmail("carlosaguiar2005@gmail.com")
                                                                 .withBuyerEmail(emailll)
-                                                                .withBuyerCellphoneNumber("55" + "")
+                                                                .withBuyerCellphoneNumber("55" + tele)
                                                                 .withReferenceCode("12583")
                                                                 .withEnvironment(PagSeguro.Environment.PRODUCTION)
                                                                 .withAuthorization("carlosaguiar2005@gmail.com", "C3218244827F4A3C9E645B856097327F"),
@@ -326,10 +326,12 @@ public class CompraPag extends Fragment {
 
 
     public void getPheferencias() {
+
         SharedPreferences preferences = getActivity().getSharedPreferences(Dados.LOGIN_NAME, Context.MODE_PRIVATE);
         iduser = preferences.getInt("2454", iduser);
         estado = preferences.getBoolean("12", estado);
         emailll = preferences.getString("245", "");
+        tele = preferences.getString("1485","");
     }
 
 

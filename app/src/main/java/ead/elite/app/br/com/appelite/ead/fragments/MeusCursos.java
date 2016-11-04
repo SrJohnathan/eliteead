@@ -52,6 +52,7 @@ import ead.elite.app.br.com.appelite.ead.R;
 import ead.elite.app.br.com.appelite.ead.adapter.AdapterMeusCursos;
 import ead.elite.app.br.com.appelite.ead.bd.Dados;
 import ead.elite.app.br.com.appelite.ead.bd.NetDados;
+import ead.elite.app.br.com.appelite.ead.componets.DividerItemDecoration;
 import ead.elite.app.br.com.appelite.ead.dominio.Buscaprova;
 import ead.elite.app.br.com.appelite.ead.dominio.Conteudo;
 import ead.elite.app.br.com.appelite.ead.interfaces.DadosVolley;
@@ -116,6 +117,8 @@ public class MeusCursos extends Fragment implements OnClickFrag {
 
 
         recyclerView.setLayoutManager(llm);
+
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),LinearLayoutManager.VERTICAL));
 
 
         return view;

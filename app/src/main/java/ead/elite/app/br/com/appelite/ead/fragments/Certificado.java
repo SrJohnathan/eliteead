@@ -67,7 +67,7 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
     public static final int REQUESTPERMISSION = 55;
     public static final int REQUESTPERMISSI = 45;
     private int position;
-    private String emailll;
+    private String emailll,tele;
     private ProgressBar progressBar;
     private TextView connection;
 
@@ -95,7 +95,6 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
             @Override
             public void geJsonObject(JSONObject jsonObject) {
 
-                Log.i("LOG", "" + jsonObject);
                 for (int i = 0; i < jsonObject.length(); i++) {
                     try {
                         JSONObject object = jsonObject.getJSONObject("" + i);
@@ -103,12 +102,13 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
                             int id = object.getInt("idc");
                             double nota = object.getDouble("nota");
                             String nome = object.getString("curso");
+                            boolean pago = object.getBoolean("cu_pago");
                             String datap = object.getString("datap");
                             String data = object.getString("dataf");
                             String hora = object.getString("hora");
                             boolean baixou = object.getBoolean("baixou");
 
-                            Certificados certificados = new Certificados(id, nome, nota, hora, datap, data, baixou);
+                            Certificados certificados = new Certificados(id, nome, nota, hora,pago, datap, data, baixou);
                             list.add(certificados);
                         } else if (object.has("nada")) {
                             connection.setText("  " + object.getString("nada"));
@@ -170,6 +170,7 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
         iduser = preferences.getInt("2454", iduser);
         estado = preferences.getBoolean("12", estado);
         emailll = preferences.getString("245", "");
+        tele = preferences.getString("1485","");
     }
 
     @Override
@@ -287,49 +288,66 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
 
     public void compra() {
 
-        BigDecimal amount = new BigDecimal("39.90");
-        //quantidade de parcelas
+        if(list.get(position).isPago()){
+
+            String url = Config.DOMIONIO + "/php/pdf/pdf.php?certi=854125896589&curso=" + list.get(position).getId() + "&user=" + iduser + "";
+            GetDownloads downloads = new GetDownloads(getActivity(), url, "Certificado"
+                    , "Certificado do Curso " + list.get(position).getNome(), list.get(position).getNome());
+            downloads.downloadManager();
 
 
-        int quantityParcel = 1;
-        getPheferencias();
-        PagSeguro.pay(new PagSeguroRequest()
-                        .withNewItem(list.get(position).getNome(), quantityParcel, amount)
-                        .withVendorEmail("carlosaguiar2005@gmail.com")
-                        .withBuyerEmail(emailll)
-                        .withBuyerCellphoneNumber("55" + "")
-                        .withReferenceCode("12583")
-                        .withEnvironment(PagSeguro.Environment.PRODUCTION)
-                  .withAuthorization("carlosaguiar2005@gmail.com", "C3218244827F4A3C9E645B856097327F"),
+
+        }else {
+
+            BigDecimal amount = new BigDecimal("39.90");
+            //quantidade de parcelas
+            Log.i("LOG",tele+"");
 
 
-                getActivity(),
-                R.id.relative,
-                new PagSeguro.PagSeguroListener() {
-                    @Override
-                    public void onSuccess(PagSeguroResponse response, Context context) {
+            int quantityParcel = 1;
+            getPheferencias();
+            PagSeguro.pay(new PagSeguroRequest()
+                            .withNewItem(list.get(position).getNome(), quantityParcel, amount)
+                            .withVendorEmail("carlosaguiar2005@gmail.com")
+                            .withBuyerEmail(emailll)
+                            .withBuyerCellphoneNumber("55" + tele)
+                            .withReferenceCode("12583")
+                            .withEnvironment(PagSeguro.Environment.PRODUCTION)
+                            .withAuthorization("carlosaguiar2005@gmail.com", "C3218244827F4A3C9E645B856097327F"),
 
-                        if(response.isSuccess()){
 
-                            String url = Config.DOMIONIO + "/php/pdf/pdf.php?certi=854125896589&curso=" + list.get(position).getId() + "&user=" + iduser + "";
-                            GetDownloads downloads = new GetDownloads(getActivity(), url, "Certificado"
-                                    , "Certificado do Curso " + list.get(position).getNome(), list.get(position).getNome());
-                            downloads.downloadManager();
+                    getActivity(),
+                    R.id.relative,
+                    new PagSeguro.PagSeguroListener() {
+                        @Override
+                        public void onSuccess(PagSeguroResponse response, Context context) {
 
+                            if(response.isSuccess()){
+
+                                String url = Config.DOMIONIO + "/php/pdf/pdf.php?certi=854125896589&curso=" + list.get(position).getId() + "&user=" + iduser + "";
+                                GetDownloads downloads = new GetDownloads(getActivity(), url, "Certificado"
+                                        , "Certificado do Curso " + list.get(position).getNome(), list.get(position).getNome());
+                                downloads.downloadManager();
+
+                            }
+
+
+
+                            Toast.makeText(context, " pagamento aprovado! ", Toast.LENGTH_LONG).show();
+                            Log.i("LOG",response+"");
                         }
 
+                        @Override
+                        public void onFailure(PagSeguroResponse response, Context context) {
+                            Toast.makeText(context, "FALHA no pagamento! ", Toast.LENGTH_LONG).show();
+                            Log.i("LOG",response+"");
+                        }
+                    });
+
+        }
 
 
-                        Toast.makeText(context, " pagamento aprovado! ", Toast.LENGTH_LONG).show();
-                        Log.i("LOG",response+"");
-                    }
 
-                    @Override
-                    public void onFailure(PagSeguroResponse response, Context context) {
-                        Toast.makeText(context, "FALHA no pagamento! ", Toast.LENGTH_LONG).show();
-                        Log.i("LOG",response+"");
-                    }
-                });
 
     }
 
