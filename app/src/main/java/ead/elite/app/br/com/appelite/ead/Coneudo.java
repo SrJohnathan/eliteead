@@ -201,6 +201,7 @@ public class Coneudo extends AppCompatActivity {
 
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
+        settings.setLoadsImagesAutomatically(true);
         settings.setSupportZoom(false);
 
 
