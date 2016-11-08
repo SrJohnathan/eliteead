@@ -3,6 +3,7 @@ package ead.elite.app.br.com.appelite.ead.fragments;
 import android.Manifest;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -19,19 +20,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
-import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,15 +36,17 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 import ead.elite.app.br.com.appelite.ead.R;
 import ead.elite.app.br.com.appelite.ead.adapter.AdapterCertificado;
+import ead.elite.app.br.com.appelite.ead.aplication.App;
 import ead.elite.app.br.com.appelite.ead.bd.Dados;
 import ead.elite.app.br.com.appelite.ead.dominio.Certificados;
 import ead.elite.app.br.com.appelite.ead.interfaces.DadosVolley;
 import ead.elite.app.br.com.appelite.ead.net.Config;
 import ead.elite.app.br.com.appelite.ead.net.download.GetDownloads;
 import ead.elite.app.br.com.appelite.ead.net.volley.Conexao;
+import ead.elite.app.br.com.appelite.ead.util.IabHelper;
+import ead.elite.app.br.com.appelite.ead.util.IabResult;
 
 /**
  * Created by Pc on 03/05/2016.
@@ -60,6 +57,7 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
     private RecyclerView recyclerView;
     private int iduser;
     private boolean estado;
+    private IabHelper iabHelper;
     private ArrayList<Certificados> list;
     private AdapterCertificado certificado;
     public static final int REQUESTPERMISSION = 55;
@@ -80,6 +78,36 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
         progressBar = (ProgressBar) view.findViewById(R.id.progss);
         connection = (TextView) view.findViewById(R.id.error);
         progressBar.setVisibility(View.VISIBLE);
+
+
+
+        // INAPPP
+
+
+        iabHelper = ((App) getActivity().getApplication()).getIabHelper();
+
+        if(iabHelper == null){
+            iabHelper = new IabHelper(getActivity(),Config.base64EncodedPublicKey);
+            ((App) getActivity().getApplication()).setIabHelper(iabHelper);
+
+            iabHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+                @Override
+                public void onIabSetupFinished(IabResult result) {
+
+                }
+            });
+
+        }
+
+
+
+
+
+
+
+
+
+
 
         connection.setCompoundDrawables(new IconicsDrawable(getActivity()).sizeDp(30).color(Color.LTGRAY).icon(CommunityMaterial.Icon.cmd_alert_circle), null, null, null);
         connection.setText("  Verifique sua Conexão com a Internet");
@@ -297,10 +325,6 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
 
         }else {
 
-            BigDecimal amount = new BigDecimal("39.90");
-            //quantidade de parcelas
-            Log.i("LOG",tele+"");
-
 
 
 
@@ -319,5 +343,22 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
     }
 
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if(iabHelper != null){
+            iabHelper.dispose();
+        }
+        iabHelper = null;
+        ((App) getActivity().getApplication()).setIabHelper(iabHelper);
+
+
+    }
 }
 
