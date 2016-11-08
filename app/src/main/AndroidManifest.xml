@@ -11,6 +11,8 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE"/> -->
 
+    <uses-permission android:name="com.android.vending.BILLING" />
+
 
     <application
         android:name=".aplication.App"
@@ -30,15 +32,15 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".Coneudo"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Prova"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".Prova" />
 
 
-        <activity android:name=".AtividadePai"></activity>
+        <activity android:name=".AtividadePai" />
 
         <activity
             android:name=".AtividadeContainer"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
 
 
         <!--
@@ -51,7 +53,7 @@
         <activity android:name=".AtividadeTabs">
             <meta-data
                 android:name="android.app.searchable"
-                android:resource="@xml/searchable"></meta-data>
+                android:resource="@xml/searchable" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

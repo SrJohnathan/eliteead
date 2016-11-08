@@ -4,22 +4,16 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,8 +23,6 @@ import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
-import com.mikepenz.materialdrawer.Drawer;
-
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -39,13 +31,9 @@ import org.json.JSONObject;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
-import br.com.uol.ps.library.PagSeguro;
-import br.com.uol.ps.library.PagSeguroRequest;
-import br.com.uol.ps.library.PagSeguroResponse;
 import ead.elite.app.br.com.appelite.ead.R;
 import ead.elite.app.br.com.appelite.ead.bd.Dados;
 import ead.elite.app.br.com.appelite.ead.dominio.Curso;
-import ead.elite.app.br.com.appelite.ead.extras.ValidaCPF;
 import ead.elite.app.br.com.appelite.ead.interfaces.DadosVolley;
 import ead.elite.app.br.com.appelite.ead.net.Config;
 import ead.elite.app.br.com.appelite.ead.net.volley.Conexao;
@@ -60,7 +48,7 @@ public class CompraPag extends Fragment {
     String numer, emailll;
     private TextView descricao, sumario, titulo, horas, categoria, publico, preco, instrutor;
     private ImageView imageView, instru;
-    private Curso curso;
+
     private String tele;
 
 
@@ -175,28 +163,7 @@ public class CompraPag extends Fragment {
                                                 dialog.dismiss();
                                                 int quantityParcel = 1;
                                                 getPheferencias();
-                                                PagSeguro.pay(new PagSeguroRequest()
-                                                                .withNewItem(strtext.getNome(), quantityParcel, amount)
-                                                                .withVendorEmail("carlosaguiar2005@gmail.com")
-                                                                .withBuyerEmail(emailll)
-                                                                .withBuyerCellphoneNumber("55" + tele)
-                                                                .withReferenceCode("12583")
-                                                                .withEnvironment(PagSeguro.Environment.PRODUCTION)
-                                                                .withAuthorization("carlosaguiar2005@gmail.com", "C3218244827F4A3C9E645B856097327F"),
 
-                                                        getActivity(),
-                                                        R.id.relativ,
-                                                        new PagSeguro.PagSeguroListener() {
-                                                            @Override
-                                                            public void onSuccess(PagSeguroResponse response, Context context) {
-                                                                Toast.makeText(context, "Lib PS retornou pagamento aprovado! " + response, Toast.LENGTH_LONG).show();
-                                                            }
-
-                                                            @Override
-                                                            public void onFailure(PagSeguroResponse response, Context context) {
-                                                                Toast.makeText(context, "Lib PS retornou FALHA no pagamento! " + response, Toast.LENGTH_LONG).show();
-                                                            }
-                                                        });
 
 
                                             }
