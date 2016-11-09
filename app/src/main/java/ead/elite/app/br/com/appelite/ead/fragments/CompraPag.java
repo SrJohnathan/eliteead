@@ -31,6 +31,9 @@ import org.json.JSONObject;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
+import br.com.uol.ps.library.PagSeguro;
+import br.com.uol.ps.library.PagSeguroRequest;
+import br.com.uol.ps.library.PagSeguroResponse;
 import ead.elite.app.br.com.appelite.ead.R;
 import ead.elite.app.br.com.appelite.ead.bd.Dados;
 import ead.elite.app.br.com.appelite.ead.dominio.Curso;
@@ -48,7 +51,6 @@ public class CompraPag extends Fragment {
     String numer, emailll;
     private TextView descricao, sumario, titulo, horas, categoria, publico, preco, instrutor;
     private ImageView imageView, instru;
-
     private String tele;
 
 
@@ -163,7 +165,28 @@ public class CompraPag extends Fragment {
                                                 dialog.dismiss();
                                                 int quantityParcel = 1;
                                                 getPheferencias();
+                                                PagSeguro.pay(new PagSeguroRequest()
+                                                                .withNewItem(strtext.getNome(), quantityParcel, amount)
+                                                                .withVendorEmail("seu email cadastrado no pagseguro")
+                                                                .withBuyerEmail(emailll)
+                                                                .withBuyerCellphoneNumber("55" + tele)
+                                                                .withReferenceCode("123")
+                                                                .withEnvironment(PagSeguro.Environment.PRODUCTION)
+                                                                .withAuthorization("seu email de login no pagseguro", "codigo obtido no pagseguro.uol.com.br"),
 
+                                                        getActivity(),
+                                                        R.id.relativ,
+                                                        new PagSeguro.PagSeguroListener() {
+                                                            @Override
+                                                            public void onSuccess(PagSeguroResponse response, Context context) {
+                                                                Toast.makeText(context, "Lib PS retornou pagamento aprovado! " + response, Toast.LENGTH_LONG).show();
+                                                            }
+
+                                                            @Override
+                                                            public void onFailure(PagSeguroResponse response, Context context) {
+                                                                Toast.makeText(context, "Lib PS retornou FALHA no pagamento! " + response, Toast.LENGTH_LONG).show();
+                                                            }
+                                                        });
 
 
                                             }

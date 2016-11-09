@@ -75,5 +75,6 @@ dependencies {
     compile 'com.android.support:design:25.0.0'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'fm.jiecao:jiecaovideoplayer:4.6.5'
+    compile files('libs/library-0.8.jar')
 }
 apply plugin: 'com.google.gms.google-services'
