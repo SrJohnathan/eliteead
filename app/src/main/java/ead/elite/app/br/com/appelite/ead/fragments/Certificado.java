@@ -351,6 +351,7 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
 
                         @Override
                         public void onFailure(PagSeguroResponse response, Context context) {
+                            Log.i("LOG","PAY"+response);
                             Toast.makeText(context, "Lib PS retornou FALHA no pagamento! " + response, Toast.LENGTH_LONG).show();
                         }
                     });
