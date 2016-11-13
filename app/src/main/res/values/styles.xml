@@ -18,13 +18,14 @@
 
 
     <style name="FacebookLoginButton" parent="CardView">
-        <item name="cardBackgroundColor">@color/md_blue_grey_100</item>
+        <item name="cardBackgroundColor">#8B8B7A</item>
     </style>
 
     <style name="ButtCard" parent="CardView">
         <item name="cardBackgroundColor">@color/md_green_A700</item>
-        <item name="android:radius">10dp</item>
     </style>
+
+
     <style name="ButtCard2" parent="CardView">
         <item name="cardBackgroundColor">@color/md_deep_purple_700</item>
         <item name="android:radius">10dp</item>

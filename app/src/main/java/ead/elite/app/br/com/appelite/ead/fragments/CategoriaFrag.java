@@ -137,6 +137,7 @@ public  class CategoriaFrag extends Fragment implements OnClickFrag {
                         String sumario = object.getString("sumario");
                         boolean pago = object.getBoolean("cu_pago");
                         String horas = object.getString("horas");
+                        String sku = object.getString("sku");
                         String fotoinst = object.getString("instrutor_idinstrutor");
                         String instrutor = object.getString("nome_int");
                         String descricao = object.getString("descricao");
@@ -144,7 +145,7 @@ public  class CategoriaFrag extends Fragment implements OnClickFrag {
                         String categoria = object.getString("nomecate");
 
 
-                        Curso cursos = new Curso(id, nome, categoria, horas, instrutor, 1, fotoinst, descricao, sumario, publico, preco, 1, pago);
+                        Curso cursos = new Curso(id,sku, nome, categoria, horas, instrutor, 1, fotoinst, descricao, sumario, publico, preco, 1, pago);
                         curso.add(cursos);
 
                     }

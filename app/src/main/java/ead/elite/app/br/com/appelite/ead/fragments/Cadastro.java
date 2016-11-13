@@ -43,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import ead.elite.app.br.com.appelite.ead.AtividadePai;
@@ -69,6 +70,7 @@ public class Cadastro extends Fragment implements View.OnClickListener {
     private IconicsDrawable drawable;
     private View view;
     private CheckBox checkBox;
+    private ArrayList<String> list;
 
 
     @Nullable
@@ -85,6 +87,22 @@ public class Cadastro extends Fragment implements View.OnClickListener {
         telefone = (EditText) view.findViewById(R.id.telefone);
         foto = (ImageView) view.findViewById(R.id.fotoaluno);
 
+
+
+        if(savedInstanceState != null){
+
+
+
+            list = (ArrayList<String>) savedInstanceState.getStringArrayList("user");
+
+            nomec.setText(list.get(0));
+            username.setText(list.get(1));
+            email.setText(list.get(2));
+            senha.setText(list.get(3));
+            resenha.setText(list.get(4));
+            telefone.setText(list.get(5));
+
+        }
 
 
 
@@ -157,7 +175,6 @@ public class Cadastro extends Fragment implements View.OnClickListener {
         drawable.color(Color.LTGRAY);
         drawable.icon(FontAwesome.Icon.faw_user);
         bitmap = drawable.toBitmap();
-        foto.setImageBitmap(bitmap);
         return (view);
     }
 
@@ -166,6 +183,7 @@ public class Cadastro extends Fragment implements View.OnClickListener {
         super.onStop();
 
     }
+
 
 
     @Override
@@ -184,7 +202,7 @@ public class Cadastro extends Fragment implements View.OnClickListener {
             }
         }
 
-
+        super.onActivityResult(requestCode,resultCode,data);
     }
 
     @Override
@@ -198,7 +216,7 @@ public class Cadastro extends Fragment implements View.OnClickListener {
 
                         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                         intent.setType("image/jpeg");
-                        this.startActivityForResult(intent, RESQUEST);
+                        startActivityForResult(intent, RESQUEST);
                     }
                 }
                 break;
@@ -223,7 +241,7 @@ public class Cadastro extends Fragment implements View.OnClickListener {
                 } else {
                     Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                     intent.setType("image/*");
-                    this.startActivityForResult(intent, RESQUEST);
+                    startActivityForResult(intent, RESQUEST);
                 }
                 break;
 
@@ -334,6 +352,34 @@ public class Cadastro extends Fragment implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        list = new ArrayList<>();
+
+        list.add(0,nomec.getText().toString());
+        list.add(1,username.getText().toString());
+        list.add(2,email.getText().toString());
+        list.add(3,senha.getText().toString());
+        list.add(4,resenha.getText().toString());
+        list.add(5,telefone.getText().toString());
+
+
+    }
+
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+
+
+        outState.putStringArrayList("user",list);
 
     }
 }

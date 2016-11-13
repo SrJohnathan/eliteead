@@ -12,14 +12,16 @@ public class Certificados implements Parcelable {
     private double nota;
     private String hotas;
     private boolean pago ;
+    private String sku;
     private String datap;
     private String dataf;
     private boolean baixou;
 
-    public Certificados(int id, String nome, double nota, String hotas, boolean pago, String datap, String dataf, boolean baixou) {
+    public Certificados(int id, String nome, double nota, String hotas, boolean pago,String sku, String datap, String dataf, boolean baixou) {
         this.id = id;
         this.nome = nome;
         this.nota = nota;
+        this.sku = sku;
         this.hotas = hotas;
         this.pago = pago;
         this.datap = datap;
@@ -27,15 +29,13 @@ public class Certificados implements Parcelable {
         this.baixou = baixou;
     }
 
-    public boolean isPago() {
-        return pago;
-    }
-
     protected Certificados(Parcel in) {
         id = in.readInt();
         nome = in.readString();
         nota = in.readDouble();
         hotas = in.readString();
+        pago = in.readByte() != 0;
+        sku = in.readString();
         datap = in.readString();
         dataf = in.readString();
         baixou = in.readByte() != 0;
@@ -47,6 +47,8 @@ public class Certificados implements Parcelable {
         dest.writeString(nome);
         dest.writeDouble(nota);
         dest.writeString(hotas);
+        dest.writeByte((byte) (pago ? 1 : 0));
+        dest.writeString(sku);
         dest.writeString(datap);
         dest.writeString(dataf);
         dest.writeByte((byte) (baixou ? 1 : 0));
@@ -68,6 +70,16 @@ public class Certificados implements Parcelable {
             return new Certificados[size];
         }
     };
+
+    public boolean isPago() {
+        return pago;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+
 
     public int getId() {
         return id;

@@ -41,6 +41,7 @@ import com.squareup.picasso.Picasso;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import ead.elite.app.br.com.appelite.ead.aplication.App;
 import ead.elite.app.br.com.appelite.ead.bd.Dados;
 import ead.elite.app.br.com.appelite.ead.bd.Database;
 import ead.elite.app.br.com.appelite.ead.bd.NetDados;
@@ -51,6 +52,7 @@ import ead.elite.app.br.com.appelite.ead.fragments.CompraPag;
 import ead.elite.app.br.com.appelite.ead.fragments.Mensagem;
 import ead.elite.app.br.com.appelite.ead.fragments.MeusCursos;
 import ead.elite.app.br.com.appelite.ead.fragments.Perfil;
+import ead.elite.app.br.com.appelite.ead.util.IabHelper;
 
 
 public class AtividadePai extends AppCompatActivity {
@@ -260,6 +262,8 @@ public class AtividadePai extends AppCompatActivity {
             drawer.closeDrawer();
         } else {
             super.onBackPressed();
+
+
         }
 
 

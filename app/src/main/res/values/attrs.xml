@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustonTextView">
+        <attr name="setFont" format="integer">
+            <flag name="light_italic" value="8"/>
+            <flag name="semi_bold" value="4"/>
+            <flag name="bold_italic" value="10"/>
+            <flag name="black" value="6"/>
+            <flag name="normal" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>

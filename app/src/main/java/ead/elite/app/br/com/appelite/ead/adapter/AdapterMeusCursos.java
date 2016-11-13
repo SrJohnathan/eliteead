@@ -12,6 +12,12 @@ import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.controller.ControllerListener;
+import com.facebook.drawee.generic.RoundingParams;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.lzyzsd.circleprogress.CircleProgress;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -32,12 +38,19 @@ public class AdapterMeusCursos extends RecyclerSwipeAdapter<AdapterMeusCursos.My
     private Context context;
     private LayoutInflater inflater;
     private OnClickFrag onClickFrag;
+    private double densidade;
+    private int largura;
+    private  int altura,pixell;
 
 
     public AdapterMeusCursos(Context context, List list) {
         this.context = context;
         this.list = list;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        densidade = context.getResources().getDisplayMetrics().density;
+        largura = context.getResources().getDisplayMetrics().widthPixels - (int) (14 * densidade + 0.5f);
+        altura = (largura / 16) * 9;
+        pixell = (int) (6 * densidade + 0.5f);
     }
 
     @Override
@@ -53,7 +66,17 @@ public class AdapterMeusCursos extends RecyclerSwipeAdapter<AdapterMeusCursos.My
     public void onBindViewHolder(MyHolder viewHolder, int position) {
         viewHolder.progress.setProgress(list.get(position).getPorce() * 10);
         viewHolder.titulo.setText(list.get(position).getNome());
-        Picasso.with(context).load(Config.DOMIONIO+"/php/server/image.php?metodo=cursos&id=" + list.get(position).getId()).resize(70,50).into(viewHolder.img);
+
+        ControllerListener listener = new BaseControllerListener(){};
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setUri(Config.DOMIONIO+"/php/server/image.php?metodo=cursos&id=" + list.get(position).getId())
+                .setControllerListener(listener)
+                .setOldController(viewHolder.img.getController())
+                .build();
+        viewHolder.img.setController(controller);
+        RoundingParams params = RoundingParams.fromCornersRadii(0,0,0,0);
+        viewHolder.img.getHierarchy().setRoundingParams(params);
+
 
     }
 
@@ -76,7 +99,7 @@ public class AdapterMeusCursos extends RecyclerSwipeAdapter<AdapterMeusCursos.My
     class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private Button conteudo, btprova,notas;
-        private ImageView puxa, img;
+        private  SimpleDraweeView img;
         private SwipeLayout swipeLayout;
         private CircleProgress progress;
         private TextView titulo;
@@ -84,24 +107,18 @@ public class AdapterMeusCursos extends RecyclerSwipeAdapter<AdapterMeusCursos.My
         public MyHolder(View itemView) {
             super(itemView);
 
+
+
             //IDS
             conteudo = (Button) itemView.findViewById(R.id.conteudo);
             notas = (Button) itemView.findViewById(R.id.notas);
             titulo = (TextView) itemView.findViewById(R.id.titulo);
             btprova = (Button) itemView.findViewById(R.id.btprova);
             progress = (CircleProgress) itemView.findViewById(R.id.donut_progress);
-            puxa = (ImageView) itemView.findViewById(R.id.puxa);
-            img = (ImageView) itemView.findViewById(R.id.img);
+            img = (SimpleDraweeView) itemView.findViewById(R.id.img);
             swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipe);
 
-            puxa.setImageDrawable(new IconicsDrawable(context).sizeDp(40).icon(CommunityMaterial.Icon.cmd_play_circle_outline).color(Color.GRAY));
-            puxa.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    swipeLayout.open();
-                }
-            });
 
 
             btprova.setOnClickListener(this);

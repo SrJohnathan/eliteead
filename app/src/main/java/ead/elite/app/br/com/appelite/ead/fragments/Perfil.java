@@ -148,6 +148,7 @@ public class Perfil extends Fragment implements View.OnClickListener {
 
         progressDialog = new MaterialDialog.Builder(getActivity())
                 .title("Atualização")
+                .cancelable(false)
                 .content("Carregando...")
                 .progress(true, 0).build();
         progressDialog.show();
@@ -267,7 +268,9 @@ public class Perfil extends Fragment implements View.OnClickListener {
 
             @Override
             public void ErrorVolley(String messege) {
+                progressDialog.hide();
                 Snackbar.make(view, "Erro na conexão", Snackbar.LENGTH_SHORT).show();
+
 
             }
         });

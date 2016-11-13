@@ -21,6 +21,7 @@ import java.util.List;
 import ead.elite.app.br.com.appelite.ead.R;
 import ead.elite.app.br.com.appelite.ead.componets.TriangleImageView;
 import ead.elite.app.br.com.appelite.ead.dominio.Certificados;
+import ead.elite.app.br.com.appelite.ead.net.Config;
 
 /**
  * Created by PC on 07/03/2016.
@@ -74,7 +75,7 @@ public class AdapterCertificado extends RecyclerView.Adapter<AdapterCertificado.
 
 
         holder.titulo.setText(list.get(position).getNome());
-        Picasso.with(context).load("http://ajsoftware.890m.com/php/server/image.php?metodo=cursos&id="+list.get(position).getId()).into(holder.imageView);
+        Picasso.with(context).load(Config.DOMIONIO+"/php/server/image.php?metodo=cursos&id="+list.get(position).getId()).into(holder.imageView);
     }
 
     @Override

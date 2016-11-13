@@ -26,6 +26,9 @@ public class Capitulos implements Parcelable {
         this.video = video;
     }
 
+    public Capitulos() {
+    }
+
     protected Capitulos(Parcel in) {
         id = in.readInt();
         nome = in.readString();
@@ -63,6 +66,34 @@ public class Capitulos implements Parcelable {
             return new Capitulos[size];
         }
     };
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public void setCap(String cap) {
+        this.cap = cap;
+    }
+
+    public void setSubtitulo1(String subtitulo1) {
+        this.subtitulo1 = subtitulo1;
+    }
+
+    public void setTexto1(String texto1) {
+        this.texto1 = texto1;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
 
     public int getId() {
         return id;

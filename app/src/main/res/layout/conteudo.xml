@@ -1,123 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/md_white_1000">
 
-
-   <android.support.v7.widget.Toolbar
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/toobar"
-       android:theme="@style/Theme.AppCompat.NoActionBar"
-       android:background="@color/md_light_blue_600" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toobar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/md_light_blue_600"
+        android:theme="@style/Theme.AppCompat.NoActionBar" />
 
 
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toobarPai"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/md_light_blue_600"
-            android:fitsSystemWindows="true"
-            android:layout_alignParentBottom="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            app:layout_collapseMode="pin"
-            app:layout_scrollFlags="scroll|enterAlways">
-
-            <ProgressBar
-                android:id="@+id/progress_wheel"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" />
-
-
-            <ToggleButton
-                android:id="@+id/check"
-                android:layout_width="40dp"
-                android:layout_height="35dp"
-                android:layout_gravity="end"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/check"
-                android:textColor="@color/md_black_1000"
-                android:textOff="NO!"
-                android:textOn="OK!" />
-
-
-
-
-
-        </android.support.v7.widget.Toolbar>
-
-
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/scroll"
-        android:layout_below="@+id/toobar"
-        android:layout_above="@+id/toobarPai"
+    <RelativeLayout
+        android:id="@+id/viepa"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_below="@+id/toobar" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/container">
-
-            <WebView
-                android:id="@+id/conteudo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </FrameLayout>
-    </android.support.v4.widget.NestedScrollView>
-
-
-
-
-
-    <!-- <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/menug"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|right"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="?attr/actionBarSize"
-        fab:menu_colorNormal="@color/accent"
-        fab:menu_colorPressed="@color/md_purple_800"
-        fab:menu_labels_colorNormal="#333333"
-        fab:menu_labels_colorPressed="#444444"
-        fab:menu_openDirection="down">
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/inemtrs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fab_colorNormal="#75ad74"
-            app:fab_colorPressed="#7FFFD4"
-            app:fab_label="Area do Aluno" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/inemdois"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fab_colorNormal="@color/md_yellow_500"
-            app:fab_colorPressed="@color/md_yellow_700"
-            app:fab_label="Fotos " />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/inemone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fab_colorNormal="@color/md_red_500"
-            app:fab_colorPressed="@color/md_red_700"
-            app:fab_label="Youtube" />
-
-    </com.github.clans.fab.FloatingActionMenu> -->
 
 
 </RelativeLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/menufab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="mini"
+        android:scaleType="center"
+        android:clickable="true"
+       app:layout_anchor="@id/toobar"
+        app:layout_anchorGravity="bottom|right"
+        android:layout_margin="10dp" />
+
+
+</android.support.design.widget.CoordinatorLayout>

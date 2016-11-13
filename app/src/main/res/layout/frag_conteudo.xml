@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ead.elite.app.br.com.appelite.ead.componets.FullDrawerLayout
+        android:id="@+id/dl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recy"/>
+
+
+        <FrameLayout
+            android:id="@+id/framel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/fundo"
+            android:choiceMode="singleChoice">
+
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/scroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/toobar">
+
+                <WebView
+                    android:id="@+id/conteudo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </android.support.v4.widget.NestedScrollView>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/menufab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fabSize="mini"
+                android:scaleType="center"
+                android:clickable="true"
+                app:backgroundTint="@color/md_purple_500"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="10dp" />
+
+        </FrameLayout>
+
+
+
+    </ead.elite.app.br.com.appelite.ead.componets.FullDrawerLayout>
+
+
+
+
+</FrameLayout>

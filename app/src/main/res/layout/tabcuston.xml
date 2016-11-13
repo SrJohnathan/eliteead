@@ -1,15 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:background="@drawable/textovi"
     android:paddingBottom="12dp"
     android:paddingTop="12dp">
 
-    <ead.elite.app.br.com.appelite.ead.componets.MyTextView
+    <ead.elite.app.br.com.appelite.ead.componets.CustonTextView
+        android:id="@+id/titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tab_text"
-        android:layout_marginLeft="5dp"/>
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/focus"
+        android:layout_toRightOf="@+id/focus"
+        android:text="Capitulo 1"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:setFont="semi_bold" />
 
-</LinearLayout>
+    <ead.elite.app.br.com.appelite.ead.componets.CustonTextView
+        android:id="@+id/subtitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titulo"
+        android:layout_marginLeft="7dp"
+        android:layout_marginStart="7dp"
+        android:layout_toLeftOf="@+id/macar"
+        android:layout_toStartOf="@+id/macar"
+        android:layout_toRightOf="@+id/focus"
+        android:layout_toEndOf="@+id/focus"
+        android:text="Subtitulo do curso desejado"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/md_grey_600"
+        app:setFont="normal" />
+
+    <TextView
+        android:id="@+id/macar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/naoanalizado"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text=" NAO ANALIZADO"
+        android:textColor="@color/md_red_500"
+        android:textSize="3pt" />
+
+    <RadioButton
+        android:id="@+id/focus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+
+        />
+
+</RelativeLayout>

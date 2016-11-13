@@ -22,25 +22,24 @@
                 android:layout_height="wrap_content">
 
                 <RelativeLayout
+                    android:id="@+id/rrr"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/rrr"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginBottom="10dp"
-                    android:layout_centerHorizontal="true">
+                    android:layout_marginTop="10dp">
 
                     <ProgressBar
+                        android:id="@+id/proimg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:id="@+id/proimg"/>
+                        android:layout_centerInParent="true" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/fotoaluno"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
-                        android:scaleType="centerCrop"
-                        />
+                        android:scaleType="centerCrop" />
 
 
                     <ImageButton
@@ -65,27 +64,28 @@
 
 
                 </RelativeLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@+id/rrr"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp" />
 
             </RelativeLayout>
 
 
-
-
-
             <RelativeLayout
-                android:layout_width="fill_parent" android:layout_height="match_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
                 android:background="@android:color/white">
 
                 <!--  This is the main content -->
                 <RelativeLayout
-                    android:layout_width="fill_parent" android:layout_height="match_parent"
-                    android:layout_margin="15dp" android:background="@drawable/estrla"
-                    android:orientation="vertical" android:padding="20dp">
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -94,175 +94,171 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:orientation="horizontal"
+                            android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:layout_height="wrap_content">
+                            android:orientation="horizontal">
 
                             <android.support.design.widget.TextInputLayout
                                 android:layout_width="match_parent"
-                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
 
                                 android:layout_marginRight="5dp"
-                                android:alwaysDrawnWithCache="true"
-                                android:layout_height="wrap_content">
+                                android:layout_weight="1"
+                                android:alwaysDrawnWithCache="true">
 
                                 <EditText
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
                                     android:id="@+id/etnome"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Nome Completo"
                                     android:lines="1"
-                                    android:singleLine="true"
                                     android:maxLines="1"
-                                    android:hint="Nome Completo" />
+                                    android:singleLine="true" />
                             </android.support.design.widget.TextInputLayout>
 
                             <ImageButton
-                                android:layout_width="40dp"
                                 android:id="@+id/btnome"
-                                android:scaleType="center"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
                                 android:layout_gravity="center_vertical"
                                 android:background="@drawable/botaoface"
-                                android:layout_height="40dp" />
+                                android:scaleType="center" />
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:orientation="horizontal"
+                            android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:layout_height="wrap_content">
+                            android:orientation="horizontal">
 
                             <android.support.design.widget.TextInputLayout
                                 android:layout_width="match_parent"
-                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
                                 android:layout_marginRight="5dp"
-                                android:layout_height="wrap_content">
+                                android:layout_weight="1">
 
                                 <EditText
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:lines="1"
-                                    android:singleLine="true"
-                                    android:maxLines="1"
                                     android:id="@+id/etuser"
-                                    android:hint="Usuario" />
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Usuario"
+                                    android:lines="1"
+                                    android:maxLines="1"
+                                    android:singleLine="true" />
                             </android.support.design.widget.TextInputLayout>
 
                             <ImageButton
-                                android:layout_width="40dp"
                                 android:id="@+id/btuser"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
                                 android:layout_gravity="center_vertical"
-                                android:background="@drawable/botaoface"
-                                android:layout_height="40dp" />
+                                android:background="@drawable/botaoface" />
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:orientation="horizontal"
+                            android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:layout_height="wrap_content">
+                            android:orientation="horizontal">
 
                             <android.support.design.widget.TextInputLayout
                                 android:layout_width="match_parent"
-                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
                                 android:layout_marginRight="5dp"
-                                android:layout_height="wrap_content">
+                                android:layout_weight="1">
 
                                 <EditText
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:lines="1"
-                                    android:inputType="textEmailAddress"
                                     android:id="@+id/etemail"
-                                    android:singleLine="true"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="E-mail"
+                                    android:inputType="textEmailAddress"
+                                    android:lines="1"
                                     android:maxLines="1"
-                                    android:hint="E-mail" />
+                                    android:singleLine="true" />
                             </android.support.design.widget.TextInputLayout>
 
                             <ImageButton
-                                android:layout_width="40dp"
                                 android:id="@+id/btemail"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
                                 android:layout_gravity="center_vertical"
-                                android:background="@drawable/botaoface"
-                                android:layout_height="40dp" />
+                                android:background="@drawable/botaoface" />
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:orientation="horizontal"
+                            android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:layout_height="wrap_content">
+                            android:orientation="horizontal">
 
                             <android.support.design.widget.TextInputLayout
                                 android:layout_width="match_parent"
-                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
                                 android:layout_marginRight="5dp"
-                                android:layout_height="wrap_content">
+                                android:layout_weight="1">
 
                                 <EditText
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:lines="1"
                                     android:id="@+id/ettele"
-                                    android:singleLine="true"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Telefone"
+                                    android:lines="1"
                                     android:maxLines="1"
-                                    android:hint="Telefone" />
+                                    android:singleLine="true" />
                             </android.support.design.widget.TextInputLayout>
 
                             <ImageButton
-                                android:layout_width="40dp"
                                 android:id="@+id/bttele"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
                                 android:layout_gravity="center_vertical"
-                                android:background="@drawable/botaoface"
-                                android:layout_height="40dp" />
+                                android:background="@drawable/botaoface" />
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:orientation="horizontal"
+                            android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:layout_height="wrap_content">
+                            android:orientation="horizontal">
 
                             <android.support.design.widget.TextInputLayout
                                 android:layout_width="match_parent"
-                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
                                 android:layout_marginRight="5dp"
-                                android:layout_height="wrap_content">
+                                android:layout_weight="1">
 
                                 <EditText
+                                    android:id="@+id/etsenha"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:lines="1"
+                                    android:hint="Senha"
                                     android:inputType="textPassword"
-                                    android:id="@+id/etsenha"
-                                    android:singleLine="true"
+                                    android:lines="1"
                                     android:maxLines="1"
-                                    android:hint="Senha" />
+                                    android:singleLine="true" />
                             </android.support.design.widget.TextInputLayout>
 
                             <ImageButton
-                                android:layout_width="40dp"
-                                android:layout_marginRight="5dp"
                                 android:id="@+id/btsolho"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
                                 android:layout_gravity="center_vertical"
-                                android:background="@drawable/btvermelho"
-                                android:layout_height="40dp" />
+                                android:layout_marginRight="5dp"
+                                android:background="@drawable/btvermelho" />
 
                             <ImageButton
-                                android:layout_width="40dp"
                                 android:id="@+id/btsenha"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
                                 android:layout_gravity="center_vertical"
-                                android:background="@drawable/botaoface"
-                                android:layout_height="40dp" />
+                                android:background="@drawable/botaoface" />
 
                         </LinearLayout>
-
-
-
-
 
 
                     </LinearLayout>
@@ -270,11 +266,15 @@
                 </RelativeLayout>
 
                 <!--  This is the title label -->
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:background="@android:color/white" android:padding="5dp"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:background="@android:color/white"
+                    android:padding="5dp"
                     android:text="Campos"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:layout_marginLeft="30dp" android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black" />
 
             </RelativeLayout>
         </LinearLayout>

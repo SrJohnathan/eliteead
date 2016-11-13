@@ -2,17 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/video"
-        android:title="avancar"
+    <item android:id="@+id/marcacao"
+        android:title="Marcação"
         app:showAsAction="always"/>
 
     <item android:id="@+id/voltar"
-        android:title="voltar"
+        android:title="Voltar"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/video"
+        android:title="Video Aula"
         app:showAsAction="always"/>
 
     <item android:id="@+id/avancar"
-        android:title="avancar"
+        android:title="Avançar"
         app:showAsAction="always"/>
+
+
 
 
 

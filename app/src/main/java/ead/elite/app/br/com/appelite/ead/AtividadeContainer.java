@@ -48,16 +48,14 @@ import ead.elite.app.br.com.appelite.ead.fragments.Perfil;
 public class AtividadeContainer extends AppCompatActivity {
     private Toolbar toolbar;
 
-
+    private int fragg;
+    private FragmentTransaction manager;
     private Dados dados;
     private int face = 0;
     private MensageIcon mensageIcon;
     private String email, nome, urlfato, iddevice;
     private boolean estado;
     private Fragment frag;
-
-
-
 
 
     @Override
@@ -68,6 +66,9 @@ public class AtividadeContainer extends AppCompatActivity {
         setContentView(R.layout.activity_atividade_container);
 
         dados = new Dados(AtividadeContainer.this);
+
+        int fragg = getIntent().getIntExtra("fra", 0);
+        FragmentTransaction manager = getFragmentManager().beginTransaction();
 
 
         mensageIcon = (MensageIcon) findViewById(R.id.masage);
@@ -158,27 +159,6 @@ public class AtividadeContainer extends AppCompatActivity {
         //NAVIGATION
 
 
-
-
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-
-        getmensagem();
-
-        int fragg = getIntent().getIntExtra("fra", 0);
-        FragmentTransaction manager = getFragmentManager().beginTransaction();
-
         switch (fragg) {
 
             case 2:
@@ -201,7 +181,7 @@ public class AtividadeContainer extends AppCompatActivity {
 
             case 4:
                 frag = (Perfil) getFragmentManager().findFragmentByTag("per");
-                if(frag == null){
+                if (frag == null) {
                     frag = new Perfil();
                     manager.replace(R.id.relativ, frag, "per");
                     manager.commit();
@@ -220,8 +200,29 @@ public class AtividadeContainer extends AppCompatActivity {
 
                 break;
 
-            case 0 : finish(); break;
+            case 0:
+                finish();
+                break;
         }
+
+
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+        getmensagem();
+
+
 
 
 

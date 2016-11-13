@@ -1,15 +1,20 @@
 package ead.elite.app.br.com.appelite.ead.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -20,6 +25,9 @@ import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.mikepenz.community_material_typeface_library.CommunityMaterial;
+import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
 
 import java.util.List;
 
@@ -121,10 +129,11 @@ public class AdapterInformatica extends RecyclerView.Adapter<AdapterInformatica.
 
     class Myview extends RecyclerView.ViewHolder implements View.OnClickListener{
         RatingBar ratingBar;
-        private CardView linearLayout;
+        private CoordinatorLayout linearLayout;
         TextView titulo,categoria,preco,horas;
         SimpleDraweeView imageView;
-        private ProgressBar progressBar;
+        private RelativeLayout relativeLayout;
+        private FloatingActionButton actionButton;
 
         public Myview(View itemView) {
             super(itemView);
@@ -134,12 +143,21 @@ public class AdapterInformatica extends RecyclerView.Adapter<AdapterInformatica.
             titulo = (TextView) itemView.findViewById(R.id.titulo);
             categoria = (TextView) itemView.findViewById(R.id.cate);
             preco = (TextView) itemView.findViewById(R.id.preco);
-            linearLayout = (CardView) itemView.findViewById(R.id.animacao);
+            linearLayout = (CoordinatorLayout) itemView.findViewById(R.id.animacao);
             horas = (TextView) itemView.findViewById(R.id.tempo);
             imageView = (SimpleDraweeView) itemView.findViewById(R.id.menuimg);
-            progressBar = (ProgressBar) itemView.findViewById(R.id.progss);
+            actionButton = (FloatingActionButton) itemView.findViewById(R.id.fab);
+            relativeLayout = (RelativeLayout) itemView.findViewById(R.id.constra);
 
-            itemView.setOnClickListener(this);
+            actionButton.setImageDrawable(new IconicsDrawable(context).sizeDp(16).color(Color.WHITE).icon(CommunityMaterial.Icon.cmd_dots_vertical));
+
+
+            actionButton.setOnClickListener(this);
+
+         /*   CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) actionButton.getLayoutParams();
+            p.setAnchorId(relativeLayout.getId());
+            actionButton.setLayoutParams(p); */
+
 
            /* ratingBar = (RatingBar) itemView.findViewById(R.id.ratingBar);
 

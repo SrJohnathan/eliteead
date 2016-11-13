@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -83,7 +84,6 @@ import ead.elite.app.br.com.appelite.ead.bd.Dados;
 import ead.elite.app.br.com.appelite.ead.bd.Database;
 import ead.elite.app.br.com.appelite.ead.bd.NetDados;
 import ead.elite.app.br.com.appelite.ead.componets.AnomationFab;
-import ead.elite.app.br.com.appelite.ead.componets.SlidingTabLayout;
 import ead.elite.app.br.com.appelite.ead.componets.libs.MensageIcon;
 import ead.elite.app.br.com.appelite.ead.fragments.Tabs;
 import ead.elite.app.br.com.appelite.ead.interfaces.DadosVolley;
@@ -109,7 +109,7 @@ public class AtividadeTabs extends AppCompatActivity {
     private PrimaryDrawerItem item1, item2, cadas;
     private SliderLayout slidingTabLayout;
     private ViewPager viewPager;
-    private SlidingTabLayout tabLayout;
+    private TabLayout tabLayout;
     private ProgressBar progressBar;
     private TextView textView;
     private ImageButton imageButton;
@@ -168,7 +168,7 @@ public class AtividadeTabs extends AppCompatActivity {
         manage.cancelAll();
 
 
-        if (estado) {
+     /*   if (estado) {
             if(savedInstanceState != null){
                 esta = (boolean) savedInstanceState.getBoolean("esta");
 
@@ -181,7 +181,7 @@ public class AtividadeTabs extends AppCompatActivity {
                 }
 
             }
-        }
+        } */
 
 
         //ID
@@ -285,27 +285,32 @@ public class AtividadeTabs extends AppCompatActivity {
         });
 
         viewPager = (ViewPager) findViewById(R.id.view);
-        tabLayout = (SlidingTabLayout) findViewById(R.id.tabs);
-        tabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setBackgroundColor(getResources().getColor(R.color.md_light_blue_600));
+
+        tabLayout.setSelectedTabIndicatorHeight(3);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                AnomationFab.animateFab(AtividadeTabs.this, position, menufab);
-             
+            public void onTabSelected(TabLayout.Tab tab) {
+
+                AnomationFab.animateFab(AtividadeTabs.this, tab.getPosition(), menufab);
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onTabUnselected(TabLayout.Tab tab) {
 
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
+            public void onTabReselected(TabLayout.Tab tab) {
 
             }
         });
 
-        tabLayout.setBackgroundColor(Color.WHITE);
-        tabLayout.setSelectedIndicatorColors(Color.RED);
+
+
+
+
 
         loading();
 
@@ -787,8 +792,9 @@ public class AtividadeTabs extends AppCompatActivity {
             btface.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    LoginFacebook();
                     dialogview.hide();
+                    LoginFacebook();
+
                 }
             });
 
@@ -901,7 +907,7 @@ public class AtividadeTabs extends AppCompatActivity {
 
                 if (strings.size() > 0) {
                     viewPager.setAdapter(new Tabs(getFragmentManager(), AtividadeTabs.this, strings));
-                    tabLayout.setViewPager(viewPager);
+                    tabLayout.setupWithViewPager(viewPager);
                     progressBar.setVisibility(View.GONE);
                 }
             }

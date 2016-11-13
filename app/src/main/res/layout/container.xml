@@ -34,6 +34,7 @@
         android:id="@+id/menufab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:fabSize="normal"
         android:layout_gravity="bottom|end"
         android:layout_margin="10dp" />
         app:fab_colorNormal="@color/md_red_500"

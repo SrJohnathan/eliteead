@@ -68,10 +68,11 @@
     android:id="@+id/catecontainer"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <ead.elite.app.br.com.appelite.ead.componets.SlidingTabLayout
+    <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
         android:layout_gravity="bottom|start"
         android:layout_width="match_parent"
+        android:theme="@style/Theme.AppCompat.NoActionBar"
         android:layout_height="wrap_content"
         />
 
@@ -127,6 +128,7 @@
         android:id="@+id/menufab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:fabSize="normal"
         android:layout_gravity="bottom|end"
         android:layout_margin="10dp" />
     app:fab_colorNormal="@color/md_red_500"

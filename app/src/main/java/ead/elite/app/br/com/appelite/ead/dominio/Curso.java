@@ -13,6 +13,7 @@ public class Curso implements Parcelable {
     private String horas;
     private String intrutor;
     private int foto;
+    private String sku;
     private String fotoinstrutor;
     private String descrisao;
     private String sumario;
@@ -24,9 +25,10 @@ public class Curso implements Parcelable {
     public Curso() {
     }
 
-    public Curso(int id, String nome, String categoria, String horas, String intrutor, int foto, String fotoinstrutor, String descrisao, String sumario, String publico, String preco, int inscritos,boolean pago) {
+    public Curso(int id, String sku, String nome, String categoria, String horas, String intrutor, int foto, String fotoinstrutor, String descrisao, String sumario, String publico, String preco, int inscritos,boolean pago) {
         this.id = id;
         this.nome = nome;
+        this.sku = sku;
         this.categoria = categoria;
         this.horas = horas;
         this.intrutor = intrutor;
@@ -40,6 +42,7 @@ public class Curso implements Parcelable {
         this.pago = pago;
     }
 
+
     protected Curso(Parcel in) {
         id = in.readInt();
         nome = in.readString();
@@ -47,6 +50,7 @@ public class Curso implements Parcelable {
         horas = in.readString();
         intrutor = in.readString();
         foto = in.readInt();
+        sku = in.readString();
         fotoinstrutor = in.readString();
         descrisao = in.readString();
         sumario = in.readString();
@@ -64,6 +68,7 @@ public class Curso implements Parcelable {
         dest.writeString(horas);
         dest.writeString(intrutor);
         dest.writeInt(foto);
+        dest.writeString(sku);
         dest.writeString(fotoinstrutor);
         dest.writeString(descrisao);
         dest.writeString(sumario);
@@ -89,6 +94,14 @@ public class Curso implements Parcelable {
             return new Curso[size];
         }
     };
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
 
     public int getId() {
         return id;

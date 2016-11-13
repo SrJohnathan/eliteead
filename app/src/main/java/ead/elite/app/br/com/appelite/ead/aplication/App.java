@@ -13,7 +13,7 @@ import ead.elite.app.br.com.appelite.ead.util.IabHelper;
  */
 public class App extends Application {
 
-    private IabHelper iabHelper;
+
 
 
     @Override
@@ -23,11 +23,5 @@ public class App extends Application {
 
     }
 
-    public IabHelper getIabHelper() {
-        return iabHelper;
-    }
 
-    public void setIabHelper(IabHelper iabHelper) {
-        this.iabHelper = iabHelper;
-    }
 }
