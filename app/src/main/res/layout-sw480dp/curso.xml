@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools"
+    android:id="@+id/animacao"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    >
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="false">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@color/md_white_1000">
+
+            <FrameLayout
+                android:id="@+id/contai"
+                android:layout_width="match_parent"
+                android:layout_height="250dp">
+
+
+                <ProgressBar
+                    android:id="@+id/progss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:indeterminate="true" />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/menuimg"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    fresco:actualImageScaleType="focusCrop"
+                    fresco:fadeDuration="500" />
+
+                <!--   <ImageButton
+                       android:id="@+id/fab"
+                       android:layout_width="60dp"
+                       android:layout_height="60dp"
+                       android:scaleType="center"
+                       android:background="@drawable/btroxo"
+                       android:layout_marginBottom="-24dp"
+                       android:layout_gravity="bottom|right"
+                       app:layout_anchorGravity="bottom|right|end"/>
+                    app:layout_anchor="@id/contai" -->
+
+            </FrameLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="bottom|right"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="-32dp"
+                android:scaleType="center"
+                app:fabSize="mini"
+                app:backgroundTint="@color/md_purple_500"
+                app:elevation="4dp"
+                app:borderWidth="0dp"
+                android:layout_below="@+id/contai"/>
+
+
+            <RelativeLayout
+                android:id="@+id/constra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/contai"
+                android:layout_gravity="bottom"
+
+                >
+
+
+                <ead.elite.app.br.com.appelite.ead.componets.CustonTextView
+                    android:id="@+id/titulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/cardview_dark_background"
+                    android:maxLines="1"
+                    app:setFont="semi_bold"
+                    android:text="Informaica"
+                    />
+
+
+
+
+                <TextView
+                    android:id="@+id/cate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/titulo"
+                    android:layout_marginLeft="20dp"
+                    android:paddingRight="10dp"
+                    android:text="Categoria"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/md_grey_700" />
+
+                <TextView
+                    android:id="@+id/tempo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cate"
+                    android:layout_marginLeft="20dp"
+                    android:text="40hrs"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+
+                    android:textColor="@color/md_grey_700" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:id="@+id/vi"
+
+                    android:layout_below="@id/tempo"
+                    android:background="@color/md_grey_200"/>
+
+                <ead.elite.app.br.com.appelite.ead.componets.CustonTextView
+                    android:id="@+id/preco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    app:setFont="bold_italic"
+                    android:layout_below="@+id/vi"
+                    android:padding="10dp"
+                    android:text="R$999,99"
+                    android:layout_marginLeft="10dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/md_red_500"
+                    android:textStyle="bold" />
+
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+
+    </android.support.v7.widget.CardView>
+
+
+
+</android.support.design.widget.CoordinatorLayout>

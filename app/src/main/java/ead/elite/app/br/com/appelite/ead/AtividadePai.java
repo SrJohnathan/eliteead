@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.login.LoginManager;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
@@ -74,7 +75,7 @@ public class AtividadePai extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        Fresco.initialize(this);
         setContentView(R.layout.activity_atividade_pai);
 
         dados = new Dados(AtividadePai.this);
@@ -166,6 +167,7 @@ public class AtividadePai extends AppCompatActivity {
         header = new AccountHeaderBuilder()
                 .withSavedInstance(savedInstanceState)
                 .withTextColor(Color.WHITE)
+                .withCompactStyle(true)
                 .withHeaderBackground(R.drawable.sombra)
                 .withActivity(this).build();
 

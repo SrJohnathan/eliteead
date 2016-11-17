@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:background="@color/md_white_1000"
@@ -54,11 +54,13 @@
                 android:scaleType="center" />
 
 
-            <ead.elite.app.br.com.appelite.ead.componets.MyTextViewArial
+            <ead.elite.app.br.com.appelite.ead.componets.CustonTextView
                 android:id="@+id/titulo"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view"
+                app:setFont="semi_bold"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/box"
                 android:text="Titulo"
@@ -66,21 +68,23 @@
 
 
 
-            <TextView
+            <ead.elite.app.br.com.appelite.ead.componets.CustonTextView
                 android:id="@+id/periudo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/titulo"
                 android:layout_marginLeft="5dp"
+                app:setFont="light_italic"
                 android:layout_toRightOf="@+id/box"
                 android:text="28/05/2016"
                 android:textColor="@color/md_black_1000" />
 
-            <TextView
+            <ead.elite.app.br.com.appelite.ead.componets.CustonTextView
                 android:id="@+id/hora"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/titulo"
+                app:setFont="light_italic"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/periudo"
                 android:text="19:40"
@@ -91,4 +95,4 @@
 
 
 </RelativeLayout>
-</android.support.v7.widget.CardView>
+</FrameLayout>

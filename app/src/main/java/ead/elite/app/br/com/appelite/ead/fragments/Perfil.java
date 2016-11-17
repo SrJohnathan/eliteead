@@ -412,6 +412,7 @@ public class Perfil extends Fragment implements View.OnClickListener {
                         if (input.toString().equals(senha)) {
                             dialog.hide();
                             etsenha.setEnabled(true);
+                            etsenha.setText(senha);
                         } else {
                             Toast.makeText(getActivity(), "Senha Incorreta!", Toast.LENGTH_LONG).show();
                         }

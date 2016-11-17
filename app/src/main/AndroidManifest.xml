@@ -33,14 +33,20 @@
         <activity
             android:name=".Coneudo"
             android:screenOrientation="portrait" />
-        <activity android:name=".Prova" />
+        <activity android:name=".Prova"
+            android:screenOrientation="portrait" />
+        />
 
 
-        <activity android:name=".AtividadePai" />
+        <activity android:name=".AtividadePai"
+            android:screenOrientation="portrait" />
+        />
 
         <activity
             android:name=".AtividadeContainer"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait" />
+        />
 
 
         <!--
@@ -53,7 +59,9 @@
         <activity android:name=".AtividadeTabs">
             <meta-data
                 android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
+                android:resource="@xml/searchable"
+                android:screenOrientation="portrait" />
+            />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

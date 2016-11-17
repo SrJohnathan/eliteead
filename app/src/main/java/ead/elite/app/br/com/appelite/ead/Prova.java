@@ -61,7 +61,7 @@ public class Prova extends AppCompatActivity implements OnClickItemProva {
     private MaterialDialog materialDialog1;
     private PosicaoRes res1, res2, res3, res4, res5, res6, res7, res8, res9, res10;
     private int iduser;
-    private boolean estado,clickfbtn = false;
+    private boolean estado,clickfbtn = false,prova = false;
     private RecyclerView recyclerView;
     private AdapterProvas adapterProvas;
     private ArrayList<PosicaoRes> posicaoRes, savidintance;
@@ -132,6 +132,8 @@ public class Prova extends AppCompatActivity implements OnClickItemProva {
             res8 = savedInstanceState.getParcelable("res8");
             res9 = savedInstanceState.getParcelable("res9");
             res10 = savedInstanceState.getParcelable("res10");
+
+            prova = savedInstanceState.getBoolean("chave");
 
 
         } else {
@@ -297,6 +299,8 @@ public class Prova extends AppCompatActivity implements OnClickItemProva {
         outState.putParcelable("res1", res8);
         outState.putParcelable("res1", res9);
         outState.putParcelable("res1", res10);
+
+        outState.putBoolean("chave",prova);
     }
 
     @Override
@@ -349,6 +353,8 @@ public class Prova extends AppCompatActivity implements OnClickItemProva {
 
     }
 
+
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -359,7 +365,10 @@ public class Prova extends AppCompatActivity implements OnClickItemProva {
     @Override
     protected void onStart() {
         super.onStart();
-        ;
+
+        if(prova){
+            finish();
+        }
 
     }
 
@@ -428,7 +437,7 @@ public class Prova extends AppCompatActivity implements OnClickItemProva {
         Conexao.Conexao(Prova.this, Config.DOMIONIO + "/php/request/correcao.php", map1, new DadosVolley() {
             @Override
             public void geJsonObject(JSONObject jsonObject) {
-
+                    prova = true;
                 try {
                     nota = jsonObject.getInt("acerto");
                     String acet = jsonObject.getString("certa");

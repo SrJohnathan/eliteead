@@ -5,6 +5,7 @@
     <color name="colorAccent">@color/md_blue_500</color>
     <color name="colorBack">@color/md_light_blue_A400</color>
     <color name="fundo">#f1f5f7</color>
+    <color name="marron">#B03060</color>
 
 
 

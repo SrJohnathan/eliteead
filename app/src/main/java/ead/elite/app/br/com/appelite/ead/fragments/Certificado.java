@@ -387,7 +387,7 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
                                     if (info.getSku().equals(skss.get(position))) {
 
 
-                                        String url = Config.DOMIONIO + "/php/pdf/pdf.php?certi=854125896589&curso=" + list.get(position).getId() + "&user=" + iduser + "";
+                                        String url = Config.DOMIONIO + "/php/pdf/pdf.php?certi=854125896589&curso=" + list.get(position).getId() + "&user=" + iduser + "&inden"+info.getToken();
                                         GetDownloads downloads = new GetDownloads(getActivity(), url, "Certificado"
                                                 , "Certificado do Curso " + list.get(position).getNome(), list.get(position).getNome());
                                         downloads.downloadManager();

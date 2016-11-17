@@ -32,6 +32,7 @@ import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic
 import java.util.List;
 
 import ead.elite.app.br.com.appelite.ead.R;
+import ead.elite.app.br.com.appelite.ead.componets.CustonTextView;
 import ead.elite.app.br.com.appelite.ead.dominio.Curso;
 import ead.elite.app.br.com.appelite.ead.interfaces.OnClickFrag;
 import ead.elite.app.br.com.appelite.ead.net.Config;
@@ -54,7 +55,13 @@ public class AdapterInformatica extends RecyclerView.Adapter<AdapterInformatica.
     public AdapterInformatica(Context context, List list) {
         this.context = context;
         this.list = list;
-        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        try{
+            layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }catch (Exception e){
+            e.printStackTrace();
+            layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        }
         densidade = context.getResources().getDisplayMetrics().density;
         largura = context.getResources().getDisplayMetrics().widthPixels - (int) (14 * densidade + 0.5f);
         altura = (largura / 16) * 9;
@@ -92,7 +99,7 @@ public class AdapterInformatica extends RecyclerView.Adapter<AdapterInformatica.
         holder.titulo.setText(list.get(position).getNome().toUpperCase());
         holder.categoria.setText(list.get(position).getCategoria());
         if(list.get(position).isPago() == false){
-            holder.preco.setText("Gratuito");
+            holder.preco.setText("Cadastro gratis");
             holder.preco.setTextColor(context.getResources().getColor(R.color.md_green_600));
         }else {
             holder.preco.setText("R$"+list.get(position).getPreco());
@@ -132,7 +139,7 @@ public class AdapterInformatica extends RecyclerView.Adapter<AdapterInformatica.
         private CoordinatorLayout linearLayout;
         TextView titulo,categoria,preco,horas;
         SimpleDraweeView imageView;
-        private RelativeLayout relativeLayout;
+
         private FloatingActionButton actionButton;
 
         public Myview(View itemView) {
@@ -142,12 +149,11 @@ public class AdapterInformatica extends RecyclerView.Adapter<AdapterInformatica.
             //IDS
             titulo = (TextView) itemView.findViewById(R.id.titulo);
             categoria = (TextView) itemView.findViewById(R.id.cate);
-            preco = (TextView) itemView.findViewById(R.id.preco);
+            preco = (CustonTextView) itemView.findViewById(R.id.preco);
             linearLayout = (CoordinatorLayout) itemView.findViewById(R.id.animacao);
             horas = (TextView) itemView.findViewById(R.id.tempo);
             imageView = (SimpleDraweeView) itemView.findViewById(R.id.menuimg);
             actionButton = (FloatingActionButton) itemView.findViewById(R.id.fab);
-            relativeLayout = (RelativeLayout) itemView.findViewById(R.id.constra);
 
             actionButton.setImageDrawable(new IconicsDrawable(context).sizeDp(16).color(Color.WHITE).icon(CommunityMaterial.Icon.cmd_dots_vertical));
 

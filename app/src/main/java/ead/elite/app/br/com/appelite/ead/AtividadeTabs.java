@@ -1,6 +1,7 @@
 package ead.elite.app.br.com.appelite.ead;
 
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.NotificationManager;
@@ -9,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -101,7 +103,7 @@ public class AtividadeTabs extends AppCompatActivity {
     private View view;
     private ProfileDrawerItem profileDrawerItem;
     private Dados dados;
-    private MaterialDialog dialogview;
+    private AlertDialog dialogview;
     private MensageIcon mensageIcon;
     private String email, nome, urlfato, iddevice;
     private boolean estado;
@@ -116,7 +118,6 @@ public class AtividadeTabs extends AppCompatActivity {
     private FloatingActionButton menufab;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,7 +125,7 @@ public class AtividadeTabs extends AppCompatActivity {
 
         Fresco.initialize(this);
 
-        if(isServiceRunning(PrograssService.class.getName()+"")){
+        if (isServiceRunning(PrograssService.class.getName() + "")) {
             stopService(new Intent("SERVICO_CO"));
         }
 
@@ -308,10 +309,6 @@ public class AtividadeTabs extends AppCompatActivity {
         });
 
 
-
-
-
-
         loading();
 
         //  }
@@ -355,6 +352,7 @@ public class AtividadeTabs extends AppCompatActivity {
         header = new AccountHeaderBuilder()
                 .withSavedInstance(savedInstanceState)
                 .withTextColor(Color.WHITE)
+                .withCompactStyle(true)
                 .withHeaderBackground(R.drawable.sombra)
                 .withActivity(this).build();
 
@@ -540,10 +538,10 @@ public class AtividadeTabs extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         MenuItem logmenu = menu.findItem(R.id.logmenu);
-        if(estado){
+        if (estado) {
             logmenu.setIcon(new IconicsDrawable(AtividadeTabs.this).icon(FontAwesome.Icon.faw_sign_in).color(Color.WHITE).sizeDp(24));
 
-        }else {
+        } else {
             logmenu.setIcon(new IconicsDrawable(AtividadeTabs.this).icon(FontAwesome.Icon.faw_sign_out).color(Color.WHITE).sizeDp(24));
 
         }
@@ -632,7 +630,7 @@ public class AtividadeTabs extends AppCompatActivity {
                                             profileDrawerItem.withEmail(email);
                                             header.updateProfile(profileDrawerItem);
 
-                                            dados.setDados(idaluno, email, name,"", id, profile1.getProfilePictureUri(100, 100).toString(), true);
+                                            dados.setDados(idaluno, email, name, "", id, profile1.getProfilePictureUri(100, 100).toString(), true);
                                             dados.Commit();
                                             estado = true;
                                             NetDados netDados = new NetDados(AtividadeTabs.this);
@@ -723,8 +721,12 @@ public class AtividadeTabs extends AppCompatActivity {
             senha.setCompoundDrawables(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_key).color(Color.LTGRAY).sizeDp(24), null, null, null);
             senha.setCompoundDrawablePadding(5);
 
-            final MaterialDialog.Builder builder = new MaterialDialog.Builder(AtividadeTabs.this).customView(view, true);
-
+            view.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+            Drawable d = new ColorDrawable(Color.BLACK);
+            AlertDialog.Builder dialogB = new AlertDialog.Builder(AtividadeTabs.this).setView(view);
+            AlertDialog dialog = dialogB.create();
+            d.setAlpha(0);
+            dialog.getWindow().setBackgroundDrawable(d);
 
             btlogin.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -754,9 +756,8 @@ public class AtividadeTabs extends AppCompatActivity {
                                     int id = object.getInt("idaluno");
                                     String user = object.getString("username");
                                     String email = object.getString("email");
-                                    String telefone = object.getString("tele");
 
-                                    dados.setDados(id, email, user, telefone ,null, Config.DOMIONIO + "/php/server/image.php?metodo=aluno&id=" + id, true);
+                                    dados.setDados(id, email, user, null, null, Config.DOMIONIO + "/php/server/image.php?metodo=aluno&id=" + id, true);
                                     dados.Commit();
                                     estado = true;
                                     NetDados netDados = new NetDados(AtividadeTabs.this);
@@ -780,6 +781,7 @@ public class AtividadeTabs extends AppCompatActivity {
                             @Override
                             public void ErrorVolley(String messege) {
                                 Snackbar.make(toolbar, "Verifique sua Conexão com a Internet", Snackbar.LENGTH_SHORT).show();
+                                Log.i("LOG",messege);
 
                             }
                         });
@@ -798,7 +800,7 @@ public class AtividadeTabs extends AppCompatActivity {
                 }
             });
 
-            dialogview = builder.build();
+            dialogview = dialogB.create();
             dialogview.show();
 
 
@@ -806,12 +808,16 @@ public class AtividadeTabs extends AppCompatActivity {
             //Lagout da app pelo facebook e email
 
             getPheferencias();
+            Drawable d = new ColorDrawable(Color.BLACK);
+
             view = View.inflate(AtividadeTabs.this, R.layout.login2, null);
+            view.setBackgroundColor(getResources().getColor(android.R.color.transparent));
             Button button = (Button) view.findViewById(R.id.closefb);
-            MaterialDialog.Builder builder = new MaterialDialog.Builder(AtividadeTabs.this).customView(view, false);
-            final MaterialDialog materialDialog = builder
-                    .title("")
-                    .build();
+            AlertDialog.Builder dialogB = new AlertDialog.Builder(AtividadeTabs.this).setView(view);
+            final AlertDialog dialog = dialogB.create();
+            d.setAlpha(0);
+            dialog.getWindow().setBackgroundDrawable(d);
+
 
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -851,7 +857,7 @@ public class AtividadeTabs extends AppCompatActivity {
 
                     }
                     drawer.addStickyFooterItem(cadas);
-                    materialDialog.dismiss();
+                    dialog.dismiss();
                 }
             });
 
@@ -864,7 +870,7 @@ public class AtividadeTabs extends AppCompatActivity {
             nome2.setText(nome);
             TextView email2 = (TextView) view.findViewById(R.id.email);
             email2.setText(email);
-            materialDialog.show();
+            dialog.show();
 
         }
 
@@ -937,7 +943,7 @@ public class AtividadeTabs extends AppCompatActivity {
         ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         List<ActivityManager.RunningServiceInfo> services = activityManager.getRunningServices(Integer.MAX_VALUE);
         for (int i = 0; i < services.size(); i++) {
-            if(services.get(i).service.getClassName().compareTo(servicoClassName)==0){
+            if (services.get(i).service.getClassName().compareTo(servicoClassName) == 0) {
                 return true;
             }
         }

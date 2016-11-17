@@ -11,9 +11,6 @@
         <item name="material_drawer_primary_text">@color/md_black_1000</item>
         <item name="material_drawer_divider">@color/md_grey_300</item>
         <item name="material_drawer_header_selection_text">@color/md_grey_400</item>
-
-
-
     </style>
 
 
@@ -52,9 +49,9 @@
 
     </style>
 
-    <style name="Check" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="@android:colorAccent">@color/md_white_1000</item>
-        <item name="@android:colorPrimary">@color/md_white_1000</item>
+    <style name="MyRadioButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/md_green_600</item>
+        <item name="colorControlActivated">@color/md_green_600</item>
     </style>
 
     <style name="OverlayDialog" parent="@android:style/Theme.Dialog">

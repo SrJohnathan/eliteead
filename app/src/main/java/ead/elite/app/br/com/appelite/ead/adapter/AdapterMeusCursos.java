@@ -55,7 +55,15 @@ public class AdapterMeusCursos extends RecyclerSwipeAdapter<AdapterMeusCursos.My
 
     @Override
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.meus_cursos, parent, false);
+        View view;
+        try {
+             view = inflater.inflate(R.layout.meus_cursos, parent, false);
+
+        }catch (Exception e){
+            e.printStackTrace();
+             view = inflater.inflate(R.layout.meus_cursos, parent, false);
+
+        }
 
         MyHolder holder = new MyHolder(view);
 

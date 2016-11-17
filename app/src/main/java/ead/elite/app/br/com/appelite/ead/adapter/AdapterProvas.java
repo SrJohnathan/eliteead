@@ -7,9 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.iconics.IconicsDrawable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,7 +80,7 @@ public class AdapterProvas extends RecyclerView.Adapter<AdapterProvas.MyviewPro>
     public void onBindViewHolder(MyviewPro holder, int position) {
 
 
-      //  holder.questao.setText("Questão "+ (position+1));
+        //  holder.questao.setText("Questão "+ (position+1));
         holder.questao.setText(provas.get(position).getQuestao());
         holder.pergunta.setText(provas.get(position).getPergunta());
         holder.res1.setText(provas.get(position).getResA());
@@ -86,36 +90,71 @@ public class AdapterProvas extends RecyclerView.Adapter<AdapterProvas.MyviewPro>
         holder.fita.setVisibility(View.GONE);
 
 
-
         if (correcao == true) {
             if (it.contains(provas.get(position).getId())) {
                 holder.fita.setVisibility(View.VISIBLE);
-                holder.fita.text("Acerto", Color.GREEN);
+                holder.fita.setImageDrawable(new IconicsDrawable(context).icon(FontAwesome.Icon.faw_thumbs_up).sizeDp(24)
+                        .color(context.getResources().getColor(R.color.md_green_600)));
+                switch (res.get(position).getResposta()) {
+                    case 1:
+                        holder.res1.setChecked(true);
+                        holder.res1.setBackgroundResource(R.drawable.certo);
+
+                        break;
+                    case 2:
+                        holder.res2.setChecked(true);
+                        holder.res2.setBackgroundResource(R.drawable.certo);
+
+                        break;
+                    case 3:
+                        holder.res3.setChecked(true);
+                        holder.res3.setBackgroundResource(R.drawable.certo);
+
+                        break;
+                    case 4:
+                        holder.res4.setChecked(true);
+                        holder.res4.setBackgroundResource(R.drawable.certo);
+
+                        break;
+                    default:
+                        break;
+
+
+                }
             } else {
                 holder.fita.setVisibility(View.VISIBLE);
-                holder.fita.text("Errou", Color.RED);
+                holder.fita.setImageDrawable(new IconicsDrawable(context).icon(FontAwesome.Icon.faw_thumbs_down).sizeDp(24)
+                        .color(context.getResources().getColor(R.color.md_red_600)));
+                switch (res.get(position).getResposta()) {
+                    case 1:
+                        holder.res1.setChecked(true);
+                        holder.res1.setBackgroundResource(R.drawable.errado);
+                        break;
+                    case 2:
+                        holder.res2.setChecked(true);
+                        holder.res2.setBackgroundResource(R.drawable.errado);
+
+                        break;
+                    case 3:
+                        holder.res3.setChecked(true);
+                        holder.res3.setBackgroundResource(R.drawable.errado);
+
+                        break;
+                    case 4:
+                        holder.res4.setChecked(true);
+                        holder.res4.setBackgroundResource(R.drawable.errado);
+
+                        break;
+                    default:
+                        break;
+
+
+                }
+
             }
 
 
-            switch (res.get(position).getResposta()) {
-                case 1:
-                    holder.res1.setChecked(true);
-                    break;
-                case 2:
-                    holder.res2.setChecked(true);
-                    break;
-                case 3:
-                    holder.res3.setChecked(true);
-                    break;
-                case 4:
-                    holder.res4.setChecked(true);
-                    break;
-                default:
-                    break;
-
-
-            }
-        }else {
+        } else {
 
             switch (provas.get(position).getAcerto()) {
                 case 1:
@@ -143,7 +182,7 @@ public class AdapterProvas extends RecyclerView.Adapter<AdapterProvas.MyviewPro>
         return provas.size();
     }
 
-    public void SavidInstance(){
+    public void SavidInstance() {
 
     }
 
@@ -153,7 +192,7 @@ public class AdapterProvas extends RecyclerView.Adapter<AdapterProvas.MyviewPro>
         private RadioGroup radioGroup;
         private TextView questao, pergunta;
         private RadioButton res1, res2, res3, res4;
-        private Fita fita;
+        private ImageView fita;
 
 
         public MyviewPro(View itemView) {
@@ -167,7 +206,7 @@ public class AdapterProvas extends RecyclerView.Adapter<AdapterProvas.MyviewPro>
             res2 = (RadioButton) itemView.findViewById(R.id.res2);
             res3 = (RadioButton) itemView.findViewById(R.id.res3);
             res4 = (RadioButton) itemView.findViewById(R.id.res4);
-            fita = (Fita) itemView.findViewById(R.id.pontos);
+            fita = (ImageView) itemView.findViewById(R.id.pontos);
 
             res1.setOnClickListener(this);
             res2.setOnClickListener(this);

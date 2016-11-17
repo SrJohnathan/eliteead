@@ -328,13 +328,13 @@ public class ConteudoFrag extends Fragment implements AdapterConteudo.OpemDrawer
         ((Coneudo)getActivity()).setDrawerLayout(drawerLayout,drawer);
 
 
-        menufab2.setBackgroundTintList(getResources().getColorStateList(R.color.md_green_500));
+        menufab2.setBackgroundTintList(getResources().getColorStateList(R.color.marron));
         menufab2.setImageDrawable(new IconicsDrawable(getActivity()).sizeDp(16).color(Color.WHITE).icon(CommunityMaterial.Icon.cmd_video));
         menufab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getActivity(), "VIDEO", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Conteúdo Indisponivel", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -353,7 +353,7 @@ public class ConteudoFrag extends Fragment implements AdapterConteudo.OpemDrawer
                         }
                     });
                 } else {
-                    menufab2.setBackgroundTintList(getResources().getColorStateList(R.color.md_green_500));
+                    menufab2.setBackgroundTintList(getResources().getColorStateList(R.color.marron));
                     menufab2.setImageDrawable(new IconicsDrawable(getActivity()).sizeDp(16).color(Color.WHITE).icon(CommunityMaterial.Icon.cmd_video));
                     menufab2.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -383,7 +383,7 @@ public class ConteudoFrag extends Fragment implements AdapterConteudo.OpemDrawer
                 super.onDrawerOpened(drawerView);
                 menufab.show();
                 ((Coneudo)getActivity()).mostrarbt();
-                toolbar.setSubtitle("");
+                toolbar.setSubtitle("Capitulos");
 
 
             }

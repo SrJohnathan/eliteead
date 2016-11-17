@@ -62,7 +62,7 @@ public class CompraPag extends Fragment {
     String numer, emailll;
     private List<String> skss;
     private IabHelper iabHelper;
-    private TextView descricao, sumario, categoria, publico, preco, instrutor;
+    private TextView descricao, sumario, categoria, publico, preco, instrutor,aviso;
     private CustonTextView horas, titulo;
     private ImageView  instru, didn;
     private String tele;
@@ -70,12 +70,21 @@ public class CompraPag extends Fragment {
     private double densidade;
     private int largura;
     private  int altura,pixell;
+    private View rootView;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.compra, container, false);
+
+        try {
+              rootView = inflater.inflate(R.layout.compra, container, false);
+        }catch (Exception e){
+            e.printStackTrace();
+             rootView = inflater.inflate(R.layout.compra, container, false);
+
+        }
+
 
         final Curso strtext = getActivity().getIntent().getParcelableExtra("put");
 
@@ -83,6 +92,7 @@ public class CompraPag extends Fragment {
         //IDS
         descricao = (TextView) rootView.findViewById(R.id.descricao);
         sumario = (TextView) rootView.findViewById(R.id.sumario);
+        aviso = (TextView) rootView.findViewById(R.id.aviso);
         instru = (ImageView) rootView.findViewById(R.id.imgins);
 
         ImageView imageView = (ImageView) rootView.findViewById(R.id.imgg);
@@ -146,6 +156,7 @@ public class CompraPag extends Fragment {
 
 
             preco.setText(strtext.getPreco());
+            aviso.setText("Certificação Gratuita");
             btnCallPayment.setVisibility(View.GONE);
             HashMap<String, String> map = new HashMap<>();
             map.put("metodo", "verificar");
@@ -268,6 +279,7 @@ public class CompraPag extends Fragment {
 
         } else if (strtext.isPago() == false) {
             preco.setText("GRATUITO");
+            aviso.setText("R$"+strtext.getPreco()+" Cetificação");
             didn.setImageDrawable(new IconicsDrawable(getActivity()).sizeDp(30).color(Color.WHITE).icon(CommunityMaterial.Icon.cmd_cash_usd));
             btnCallPayment.setOnClickListener(new View.OnClickListener() {
                 @Override

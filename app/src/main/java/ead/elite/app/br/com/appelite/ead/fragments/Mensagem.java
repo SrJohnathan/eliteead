@@ -34,6 +34,7 @@ import ead.elite.app.br.com.appelite.ead.R;
 import ead.elite.app.br.com.appelite.ead.adapter.AdapterMensagem;
 import ead.elite.app.br.com.appelite.ead.adapter.ListExcluir;
 import ead.elite.app.br.com.appelite.ead.bd.Database;
+import ead.elite.app.br.com.appelite.ead.componets.DividerItemDecoration;
 import ead.elite.app.br.com.appelite.ead.dominio.Mesagem;
 import ead.elite.app.br.com.appelite.ead.interfaces.OnClickFrag;
 
@@ -81,6 +82,8 @@ public class Mensagem extends Fragment {
             recyclerView = (RecyclerView) view.findViewById(R.id.recy);
             recyclerView.setAdapter(mensagem);
             recyclerView.setLayoutManager(layoutManager);
+            recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),LinearLayoutManager.VERTICAL));
+
         }
 
 
