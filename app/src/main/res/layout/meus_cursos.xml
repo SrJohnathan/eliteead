@@ -108,7 +108,7 @@
 
 
 
-                    <ead.elite.app.br.com.appelite.ead.componets.CustonTextView
+                    <ead.app.br.com.appelite.ead.componets.CustonTextView
                         android:id="@+id/titulo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

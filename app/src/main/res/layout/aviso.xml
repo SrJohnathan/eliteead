@@ -54,7 +54,7 @@
                 android:scaleType="center" />
 
 
-            <ead.elite.app.br.com.appelite.ead.componets.CustonTextView
+            <ead.app.br.com.appelite.ead.componets.CustonTextView
                 android:id="@+id/titulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
 
 
 
-            <ead.elite.app.br.com.appelite.ead.componets.CustonTextView
+            <ead.app.br.com.appelite.ead.componets.CustonTextView
                 android:id="@+id/periudo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                 android:text="28/05/2016"
                 android:textColor="@color/md_black_1000" />
 
-            <ead.elite.app.br.com.appelite.ead.componets.CustonTextView
+            <ead.app.br.com.appelite.ead.componets.CustonTextView
                 android:id="@+id/hora"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -84,7 +84,7 @@
                 >
 
 
-                <ead.elite.app.br.com.appelite.ead.componets.CustonTextView
+                <ead.app.br.com.appelite.ead.componets.CustonTextView
                     android:id="@+id/titulo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
                     android:layout_below="@id/tempo"
                     android:background="@color/md_grey_200"/>
 
-                <ead.elite.app.br.com.appelite.ead.componets.CustonTextView
+                <ead.app.br.com.appelite.ead.componets.CustonTextView
                     android:id="@+id/preco"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

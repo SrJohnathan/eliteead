@@ -1,7 +1,9 @@
 {
   "project_info": {
     "project_number": "424669446753",
-    "project_id": "eadelite"
+    "firebase_url": "https://eadelite.firebaseio.com",
+    "project_id": "eadelite",
+    "storage_bucket": "eadelite.appspot.com"
   },
   "client": [
     {
@@ -11,7 +13,12 @@
           "package_name": "ead.elite.app.br.com.appelite.ead"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "424669446753-jjf9rc1kadq249rhnrp6uvpk46vitj8l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC3GPvrGcIwmup5WKMVKB2rBnqJlLukFB8"
@@ -26,7 +33,38 @@
           "other_platform_oauth_client": []
         },
         "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424669446753:android:7ee834cd00f2f2dc",
+        "android_client_info": {
+          "package_name": "ead.app.br.com.appelite.ead"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424669446753-jjf9rc1kadq249rhnrp6uvpk46vitj8l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3GPvrGcIwmup5WKMVKB2rBnqJlLukFB8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
           "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
         }
       }
     }

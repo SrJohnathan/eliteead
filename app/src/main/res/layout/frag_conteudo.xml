@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ead.elite.app.br.com.appelite.ead.componets.FullDrawerLayout
+    <ead.app.br.com.appelite.ead.componets.FullDrawerLayout
         android:id="@+id/dl"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -51,7 +51,7 @@
 
 
 
-    </ead.elite.app.br.com.appelite.ead.componets.FullDrawerLayout>
+    </ead.app.br.com.appelite.ead.componets.FullDrawerLayout>
 
 
 

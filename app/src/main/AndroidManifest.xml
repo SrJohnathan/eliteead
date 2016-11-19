@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ead.elite.app.br.com.appelite.ead">
+    package="ead.app.br.com.appelite.ead">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -39,14 +39,20 @@
 
 
         <activity android:name=".AtividadePai"
-            android:screenOrientation="portrait" />
-        />
+            android:screenOrientation="portrait"
+            android:parentActivityName="ead.app.br.com.appelite.ead.AtividadeTabs">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ead.app.br.com.appelite.ead.AtividadeTabs"/>
+        </activity>
+
 
         <activity
             android:name=".AtividadeContainer"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
-        />
+
 
 
         <!--

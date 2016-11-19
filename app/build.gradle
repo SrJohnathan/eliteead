@@ -7,17 +7,17 @@ android {
     compileSdkVersion 25
     buildToolsVersion '24.0.3'
     defaultConfig {
-        applicationId "ead.elite.app.br.com.appelite.ead"
+        applicationId "ead.app.br.com.appelite.ead"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.2"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-           
+
         }
     }
 

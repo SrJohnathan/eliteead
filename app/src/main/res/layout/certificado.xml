@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="2dp" />
 
-        <ead.elite.app.br.com.appelite.ead.componets.TriangleImageView
+        <ead.app.br.com.appelite.ead.componets.TriangleImageView
             android:layout_width="150dp"
             android:layout_height="70dp"
             android:scaleType="fitXY"
@@ -27,7 +27,7 @@
             />
 
 
-        <ead.elite.app.br.com.appelite.ead.componets.CustonTextView
+        <ead.app.br.com.appelite.ead.componets.CustonTextView
             android:id="@+id/titulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             android:layout_toLeftOf="@+id/img"
             android:textSize="15dp"/>
 
-        <ead.elite.app.br.com.appelite.ead.componets.MyTextView
+        <ead.app.br.com.appelite.ead.componets.MyTextView
             android:id="@+id/nota1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
             android:text="Media:6.5"
             android:textColor="@color/md_black_1000" />
 
-        <ead.elite.app.br.com.appelite.ead.componets.MyTextView
+        <ead.app.br.com.appelite.ead.componets.MyTextView
             android:id="@+id/nota2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

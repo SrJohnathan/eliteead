@@ -14,7 +14,7 @@
         android:layout_margin="1dp"
         android:background="@color/md_white_1000">
 
-        <ead.elite.app.br.com.appelite.ead.componets.CustonTextView
+        <ead.app.br.com.appelite.ead.componets.CustonTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Questao 1"
@@ -25,7 +25,7 @@
             android:layout_marginTop="5dp"
             />
         
-        <ead.elite.app.br.com.appelite.ead.componets.CustonTextView
+        <ead.app.br.com.appelite.ead.componets.CustonTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/aviso"
