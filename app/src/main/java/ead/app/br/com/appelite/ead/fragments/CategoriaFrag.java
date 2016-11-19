@@ -1,6 +1,7 @@
 package ead.app.br.com.appelite.ead.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -169,10 +170,23 @@ public  class CategoriaFrag extends Fragment implements OnClickFrag {
     @Override
     public void Click(View view, int position) {
 
-        Intent intent = new Intent(getActivity(), AtividadeContainer.class);
-        intent.putExtra("fra", 5);
-        intent.putExtra("put",curso.get(position));
-        startActivity(intent);
+
+        if(view.getId() == R.id.menuimg){
+
+            CompraPag frag = new CompraPag();
+            FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+            transaction.replace(R.id.catecontainer, frag, "gg");
+            transaction.addToBackStack("j");
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("put",curso.get(position));
+            frag.setArguments(bundle);
+            transaction.commit();
+
+
+        } else if(view.getId() == R.id.fab) {
+
+
+        }
 
 
     }
