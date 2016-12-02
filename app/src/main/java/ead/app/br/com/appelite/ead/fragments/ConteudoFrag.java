@@ -119,6 +119,8 @@ public class ConteudoFrag extends Fragment implements AdapterConteudo.OpemDrawer
         settings.setLoadsImagesAutomatically(true);
         settings.setSupportZoom(false);
 
+        webView.setHorizontalScrollbarOverlay(false);
+
 
         buscarMarcacao();
 
@@ -128,10 +130,10 @@ public class ConteudoFrag extends Fragment implements AdapterConteudo.OpemDrawer
 
     public void preencher(final Capitulos capitulos) {
         String webContent = "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><link href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7\" crossorigin=\"anonymous\"></head>"
-                + "<body> <h2 style=\" margin-left:30px;\">" + capitulos.getNome() + "</h2> <br> <br> " + capitulos.getTexto1() + " </h2> <br> <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\" integrity=\"sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS\" crossorigin=\"anonymous\"></script> <script   src=\"https://code.jquery.com/jquery-2.2.3.js\"   integrity=\"sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=\"   crossorigin=\"anonymous\"></script>" +
+                + "<body style=\" width: 100%;\"><div class=\"container\">  <h2 style=\" margin-left:30px;\">" + capitulos.getNome() + "</h2> <br> <br> " + capitulos.getTexto1() + " </h2> <br> <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\" integrity=\"sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS\" crossorigin=\"anonymous\"></script> <script   src=\"https://code.jquery.com/jquery-2.2.3.js\"   integrity=\"sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=\"   crossorigin=\"anonymous\"></script>" +
                 "<script>$(document).ready(function(){\n" +
                 "            $(\"img\").addClass(\"img-responsive\");\n" +
-                "    });\n</script></body></html>";
+                "    });\n</script></div></body></html>";
         scrollView.scrollTo(0, 0);
         webView.loadData(webContent, "text/html", "UTF-8");
         webView.setWebViewClient(new WebViewClient() {
@@ -354,7 +356,7 @@ public class ConteudoFrag extends Fragment implements AdapterConteudo.OpemDrawer
                         @Override
                         public void onClick(View view) {
 
-                            Toast.makeText(getActivity(), "VIDEO", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Conteúdo Indisponivel", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

@@ -16,6 +16,7 @@ import android.support.v13.app.FragmentCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,11 +35,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import ead.app.br.com.appelite.ead.AtividadeContainer;
+import ead.app.br.com.appelite.ead.AtividadeTabs;
 import ead.app.br.com.appelite.ead.R;
 import ead.app.br.com.appelite.ead.adapter.AdapterCertificado;
 import ead.app.br.com.appelite.ead.bd.Dados;
 import ead.app.br.com.appelite.ead.componets.DividerItemDecoration;
 import ead.app.br.com.appelite.ead.dominio.Certificados;
+import ead.app.br.com.appelite.ead.extras.RandomAlphaNumeric;
 import ead.app.br.com.appelite.ead.interfaces.DadosVolley;
 import ead.app.br.com.appelite.ead.net.Config;
 import ead.app.br.com.appelite.ead.net.download.GetDownloads;
@@ -344,63 +348,113 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
 
     public void compra() {
 
-        if (list.get(position).isPago()) {
 
-
-            String url = Config.DOMIONIO + "/php/pdf/pdf.php?certi=854125896589&curso=" + list.get(position).getId() + "&user=" + iduser + "";
-            GetDownloads downloads = new GetDownloads(getActivity(), url, "Certificado"
-                    , "Certificado do Curso " + list.get(position).getNome(), list.get(position).getNome());
-            downloads.downloadManager();
-
-
-        } else {
-
-            final IabHelper abHelper = new IabHelper(getActivity(), Config.base64EncodedPublicKey);
-                iabHelper = abHelper;
-            abHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+        if (estado) {
+            getPheferencias();
+            HashMap<String, String> map = new HashMap<>();
+            map.put("id", iduser + "");
+            map.put("metodo", "aluno");
+            Conexao.Conexao(getActivity(), Config.DOMIONIO + "/php/request/perfil.php", map, new DadosVolley() {
                 @Override
-                public void onIabSetupFinished(IabResult result) {
+                public void geJsonObject(JSONObject jsonObject) {
 
-                    if (result.isFailure()) {
+                    Log.i("LOG",jsonObject+"");
 
-                        return;
+                    JSONObject object = null;
+                    try {
+                        object = jsonObject.getJSONObject("0");
+                        if (object.getString("nome_completo").equals("null") || object.getString("nome_completo").length() == 0 ) {
+                            Snackbar.make(view, "Verifique seus dados", Snackbar.LENGTH_INDEFINITE).setAction("OK!", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
 
-                    } else {
-
-
-                        abHelper.launchPurchaseFlow(getActivity(), skss.get(position), 2157, new IabHelper.OnIabPurchaseFinishedListener() {
-                            @Override
-                            public void onIabPurchaseFinished(IabResult result, Purchase info) {
-
-                                if (result.isFailure()) {
-
-
-                                    return;
-
-                                } else {
-
-                                    if (info.getSku().equals(skss.get(position))) {
-
-
-                                        String url = Config.DOMIONIO + "/php/pdf/pdf.php?certi=854125896589&curso=" + list.get(position).getId() + "&user=" + iduser + "&inden"+info.getToken();
-                                        GetDownloads downloads = new GetDownloads(getActivity(), url, "Certificado"
-                                                , "Certificado do Curso " + list.get(position).getNome(), list.get(position).getNome());
-                                        downloads.downloadManager();
-
-
-                                    }
+                                    Intent intent = new Intent(getActivity(), AtividadeContainer.class);
+                                    intent.putExtra("fra", 4);
+                                    startActivity(intent);
 
                                 }
+                            }).show();
+
+                        }else {
+
+                            if (list.get(position).isPago()) {
+
+
+                                String url = Config.DOMIONIO + "/php/pdf/pdf.php?certi=854125896589&curso=" + list.get(position).getId() + "&user=" + iduser + "";
+                                GetDownloads downloads = new GetDownloads(getActivity(), url, "Certificado"
+                                        , "Certificado do Curso " + list.get(position).getNome(), list.get(position).getNome());
+                                downloads.downloadManager();
+
+
+                            } else {
+
+
+
+                                final IabHelper abHelper = new IabHelper(getActivity(), Config.base64EncodedPublicKey);
+                                iabHelper = abHelper;
+                                abHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+                                    @Override
+                                    public void onIabSetupFinished(IabResult result) {
+
+                                        if (result.isFailure()) {
+
+                                            return;
+
+                                        } else {
+
+
+                                            abHelper.launchPurchaseFlow(getActivity(), skss.get(position), 2157, new IabHelper.OnIabPurchaseFinishedListener() {
+                                                @Override
+                                                public void onIabPurchaseFinished(IabResult result, Purchase info) {
+
+                                                    if (result.isFailure()) {
+
+
+                                                        return;
+
+                                                    } else {
+
+                                                        if (info.getSku().equals(skss.get(position))) {
+
+
+                                                            String url = Config.DOMIONIO + "/php/pdf/pdf.php?certi=854125896589&curso=" + list.get(position).getId() + "&user=" + iduser + "&inden"+info.getToken();
+                                                            GetDownloads downloads = new GetDownloads(getActivity(), url, "Certificado"
+                                                                    , "Certificado do Curso " + list.get(position).getNome(), list.get(position).getNome());
+                                                            downloads.downloadManager();
+
+
+                                                        }
+
+                                                    }
+                                                }
+                                            },RandomAlphaNumeric.randomString(17));
+
+
+                                        }
+                                    }
+                                });
+
+
                             }
-                        }, "");
 
-
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
+
+                }
+
+                @Override
+                public void ErrorVolley(String messege) {
+
+                    Snackbar.make(view, "Erro na conexão", Snackbar.LENGTH_SHORT).show();
+
+
                 }
             });
-
-
         }
+
+
 
 
     }

@@ -440,6 +440,9 @@ public class Prova extends AppCompatActivity implements OnClickItemProva {
         Conexao.Conexao(Prova.this, Config.DOMIONIO + "/php/request/correcao.php", map1, new DadosVolley() {
             @Override
             public void geJsonObject(JSONObject jsonObject) {
+
+                Log.i("LOG",jsonObject+"");
+
                     prova = true;
                 try {
                     nota = jsonObject.getInt("acerto");
@@ -513,7 +516,7 @@ public class Prova extends AppCompatActivity implements OnClickItemProva {
         map1.put("iduser", iduser + "");
         map1.put("idcurso", buscaprova.getIdcurso() + "");
         map1.put("prova", buscaprova.getProva());
-        stopService(new Intent("SERVICO_CO"));
+        stopService(new Intent(Prova.this,PrograssService.class));
         Conexao.Conexao(Prova.this, Config.DOMIONIO + "/php/request/correcao.php", map1, new DadosVolley() {
             @Override
             public void geJsonObject(JSONObject jsonObject) {

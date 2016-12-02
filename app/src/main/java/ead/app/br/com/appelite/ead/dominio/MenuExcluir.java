@@ -11,14 +11,29 @@ public class MenuExcluir implements Parcelable {
 
     private String texto;
     private Drawable icom;
+    private int color;
 
-    public MenuExcluir(String texto, Drawable icom) {
+    public MenuExcluir(String texto, Drawable icom,int color) {
         this.texto = texto;
         this.icom = icom;
+        this.color = color;
     }
+
 
     protected MenuExcluir(Parcel in) {
         texto = in.readString();
+        color = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(texto);
+        dest.writeInt(color);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<MenuExcluir> CREATOR = new Creator<MenuExcluir>() {
@@ -41,13 +56,7 @@ public class MenuExcluir implements Parcelable {
         return icom;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(texto);
+    public int getColor() {
+        return color;
     }
 }

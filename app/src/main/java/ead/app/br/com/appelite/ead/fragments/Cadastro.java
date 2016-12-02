@@ -15,12 +15,14 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v13.app.FragmentCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +44,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import ead.app.br.com.appelite.ead.AtividadeTabs;
 import ead.app.br.com.appelite.ead.R;
@@ -67,6 +70,7 @@ public class Cadastro extends Fragment implements View.OnClickListener {
     private View view;
     private CheckBox checkBox;
     private ArrayList<String> list;
+    private TextInputLayout textInputLayout;
 
 
     @Nullable
@@ -81,8 +85,13 @@ public class Cadastro extends Fragment implements View.OnClickListener {
         senha = (EditText) view.findViewById(R.id.senha);
         resenha = (EditText) view.findViewById(R.id.resenha);
         telefone = (EditText) view.findViewById(R.id.telefone);
+        textInputLayout = (TextInputLayout) view.findViewById(R.id.ttemail);
         foto = (ImageView) view.findViewById(R.id.fotoaluno);
 
+
+
+        textInputLayout.setError("Verifique seu e-mail");
+        textInputLayout.setErrorEnabled(false);
 
 
         if(savedInstanceState != null){
@@ -114,7 +123,11 @@ public class Cadastro extends Fragment implements View.OnClickListener {
         apagar.setImageDrawable(new IconicsDrawable(getActivity()).sizeDp(16).color(Color.WHITE).icon(CommunityMaterial.Icon.cmd_close));
 
         buscar.setOnClickListener(this);
-        casdastra.setOnClickListener(this);
+        casdastra.setOnClickListener(Cadastro.this);
+
+
+
+
         apagar.setOnClickListener(this);
 
 
@@ -273,83 +286,95 @@ public class Cadastro extends Fragment implements View.OnClickListener {
                         !email.getText().toString().isEmpty() && !senha.getText().toString().isEmpty() &&
                         !resenha.getText().toString().isEmpty() && senha.getText().toString().equals(resenha.getText().toString())) {
 
-                    MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
-                            .title("Confirmar")
-                            .positiveText("Sim")
-                            .negativeText("Não")
-                            .positiveColor(Color.GREEN)
-                            .negativeColor(Color.RED)
-                            .onNegative(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    dialog.dismiss();
-                                }
-                            }).onPositive(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-                                    progressDialog.setIndeterminate(true);
-                                    progressDialog.setMessage("Carregando...");
-                                    progressDialog.show();
-                                    HashMap<String, String> map = new HashMap<String, String>();
-
-                                    map.put("nomec", nomec.getText().toString());
-                                    map.put("user", username.getText().toString());
-                                    map.put("email", email.getText().toString());
-                                    map.put("tele", Mask.unmask( telefone.getText().toString()));
-                                    map.put("senha", senha.getText().toString());
-                                    map.put("foto", getStringImage(bitmap));
-                                    map.put("metodo", "cadastro");
+                        if(isValidEmail(email.getText().toString())) {
+                            textInputLayout.setErrorEnabled(false);
 
 
-                                    Conexao.Conexao(getActivity(), Config.DOMIONIO+"/php/request/cadas_login_app.php", map, new DadosVolley() {
+                            MaterialDialog.Builder builder = new MaterialDialog.Builder(getActivity())
+                                    .title("Confirmar")
+                                    .positiveText("Sim")
+                                    .negativeText("Não")
+                                    .positiveColor(Color.GREEN)
+                                    .negativeColor(Color.RED)
+                                    .onNegative(new MaterialDialog.SingleButtonCallback() {
                                         @Override
-                                        public void geJsonObject(JSONObject jsonObject) {
+                                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                            dialog.dismiss();
+                                        }
+                                    }).onPositive(new MaterialDialog.SingleButtonCallback() {
+                                        @Override
+                                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                            final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+                                            progressDialog.setIndeterminate(true);
+                                            progressDialog.setMessage("Carregando...");
+                                            progressDialog.show();
+                                            HashMap<String, String> map = new HashMap<String, String>();
 
-                                            Log.i("LOG",jsonObject+"");
-                                            try {
-                                                if(jsonObject.has("condicao") == true){
-                                                    if(jsonObject.getBoolean("condicao") == true){
-                                                        progressDialog.dismiss();
-                                                        Snackbar.make(view,"Cadastrado com Sucesso",Snackbar.LENGTH_SHORT).setCallback(new Snackbar.Callback() {
-                                                            @Override
-                                                            public void onDismissed(Snackbar snackbar, int event) {
-                                                                super.onDismissed(snackbar, event);
-                                                              //  getActivity().getFragmentManager().beginTransaction().remove(Cadastro.this).commit();
-                                                                startActivity(new Intent(getActivity(), AtividadeTabs.class));
-                                                                getActivity().finish();
+                                            map.put("nomec", nomec.getText().toString());
+                                            map.put("user", username.getText().toString());
+                                            map.put("email", email.getText().toString());
+                                            map.put("tele", Mask.unmask(telefone.getText().toString()));
+                                            map.put("senha", senha.getText().toString());
+                                            map.put("foto", getStringImage(bitmap));
+                                            map.put("metodo", "cadastro");
+
+
+                                            Conexao.Conexao(getActivity(), Config.DOMIONIO + "/php/request/cadas_login_app.php", map, new DadosVolley() {
+                                                @Override
+                                                public void geJsonObject(JSONObject jsonObject) {
+
+                                                    Log.i("LOG", jsonObject + "");
+                                                    try {
+                                                        if (jsonObject.has("condicao") == true) {
+                                                            if (jsonObject.getBoolean("condicao") == true) {
+                                                                progressDialog.dismiss();
+                                                                Snackbar.make(view, "Cadastrado com Sucesso", Snackbar.LENGTH_SHORT).setCallback(new Snackbar.Callback() {
+                                                                    @Override
+                                                                    public void onDismissed(Snackbar snackbar, int event) {
+                                                                        super.onDismissed(snackbar, event);
+                                                                        //  getActivity().getFragmentManager().beginTransaction().remove(Cadastro.this).commit();
+                                                                        startActivity(new Intent(getActivity(), AtividadeTabs.class));
+                                                                        getActivity().finish();
+
+                                                                    }
+                                                                }).show();
+
 
                                                             }
-                                                        }).show();
+                                                        } else if (jsonObject.has("dupla")) {
+                                                            if (jsonObject.getBoolean("dupla") == true) {
+                                                                progressDialog.dismiss();
+                                                                Snackbar.make(view, "E-mail Existente", Snackbar.LENGTH_SHORT).show();
 
+                                                            }
+                                                        }
 
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
                                                     }
-                                                }else if(jsonObject.has("dupla")){
-                                                    if(jsonObject.getBoolean("dupla") == true){
-                                                        progressDialog.dismiss();
-                                                        Snackbar.make(view,"E-mail Existente",Snackbar.LENGTH_SHORT).show();
 
-                                                    }
                                                 }
 
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
+                                                @Override
+                                                public void ErrorVolley(String messege) {
+                                                    progressDialog.dismiss();
+                                                    Log.i("LOG", messege);
 
-                                        }
-
-                                        @Override
-                                        public void ErrorVolley(String messege) {
-                                            progressDialog.dismiss();
-                                            Log.i("LOG",messege);
-
+                                                }
+                                            });
                                         }
                                     });
-                                }
-                            });
 
-                        MaterialDialog dialog = builder.build();
-                    dialog.show();
+                            MaterialDialog dialog = builder.build();
+                            dialog.show();
+
+                        }else {
+                            textInputLayout.setErrorEnabled(true);
+                            textInputLayout.setError("Verifique seu e-mail");
+
+                            Snackbar.make(view, "Verifique Seus Dados Pessoais", Snackbar.LENGTH_SHORT).show();
+
+                        }
 
                 } else {
                     Snackbar.make(view, "Verifique Seus Dados Pessoais", Snackbar.LENGTH_SHORT).show();
@@ -403,5 +428,10 @@ public class Cadastro extends Fragment implements View.OnClickListener {
 
         outState.putStringArrayList("user",list);
 
+    }
+
+    private boolean isValidEmail(String email) {
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
     }
 }

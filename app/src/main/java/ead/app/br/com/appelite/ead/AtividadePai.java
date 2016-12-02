@@ -191,15 +191,15 @@ public class AtividadePai extends AppCompatActivity {
 
 
         item1 = new PrimaryDrawerItem().withBadge("32").withBadgeStyle(new BadgeStyle(Color.RED, Color.WHITE)).withName("Todos os Cursos").withIcon(
-                new IconicsDrawable(this).icon(MaterialDesignIconic.Icon.gmi_book).sizeDp(30).color(Color.LTGRAY));
+                new IconicsDrawable(this).icon(MaterialDesignIconic.Icon.gmi_book).sizeDp(30).color(Color.RED));
         item2 = new PrimaryDrawerItem().withBadge("12").withBadgeStyle(new BadgeStyle(Color.RED, Color.WHITE)).withName("Meus Cursos").withIcon(
-                new IconicsDrawable(this).icon(MaterialDesignIconic.Icon.gmi_book_image).sizeDp(30).color(Color.LTGRAY));
+                new IconicsDrawable(this).icon(MaterialDesignIconic.Icon.gmi_book_image).sizeDp(30).color(Color.MAGENTA));
 
 
         PrimaryDrawerItem item3 = new PrimaryDrawerItem().withName("Certificados").withIcon(
-                new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_certificate).sizeDp(30).color(Color.LTGRAY));
+                new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_certificate).sizeDp(30).color(Color.GREEN));
         PrimaryDrawerItem item4 = new PrimaryDrawerItem().withName("Perfil").withIcon(
-                new IconicsDrawable(this).icon(MaterialDesignIconic.Icon.gmi_folder_person).sizeDp(30).color(Color.LTGRAY));
+                new IconicsDrawable(this).icon(MaterialDesignIconic.Icon.gmi_folder_person).sizeDp(30).color(Color.parseColor("#660033")));
 
 
         drawer.addItems(new SectionDrawerItem().withName("Conteúdo").withDivider(false).withTextColor(Color.GRAY), item1, item2, item3,

@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.daimajia.swipe.SwipeLayout;
-import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
@@ -30,7 +28,7 @@ import ead.app.br.com.appelite.ead.net.Config;
 /**
  * Created by PC on 08/03/2016.
  */
-public class AdapterMeusCursos extends RecyclerSwipeAdapter<AdapterMeusCursos.MyHolder> {
+public class AdapterMeusCursos extends RecyclerView.Adapter<AdapterMeusCursos.MyHolder> {
     private List<Conteudo> list;
     private Context context;
     private LayoutInflater inflater;
@@ -98,16 +96,12 @@ public class AdapterMeusCursos extends RecyclerSwipeAdapter<AdapterMeusCursos.My
         return list.size();
     }
 
-    @Override
-    public int getSwipeLayoutResourceId(int position) {
-        return R.id.swipe;
-    }
+
 
     class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private Button conteudo, btprova,notas;
         private  SimpleDraweeView img;
-        private SwipeLayout swipeLayout;
         private LinearLayout linearLayout;
         private CircleProgress progress;
         private TextView titulo;
@@ -118,7 +112,6 @@ public class AdapterMeusCursos extends RecyclerSwipeAdapter<AdapterMeusCursos.My
 
 
             //IDS
-            swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipe);
 
 
 

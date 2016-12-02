@@ -5,7 +5,6 @@
     android:id="@+id/animacao"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="false">
 
@@ -14,60 +13,20 @@
         android:layout_height="wrap_content"
         android:elevation="10dp">
 
-        <com.daimajia.swipe.SwipeLayout xmlns:swipe="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/swipe"
+        <com.silencedut.expandablelayout.ExpandableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/expandable_layout"
+            app:expWithParentScroll="true"
+            app:expDuration = "300"
+            app:expExpandScrollTogether = "false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/md_white_1000"
-            swipe:leftEdgeSwipeOffset="0dp"
-            swipe:rightEdgeSwipeOffset="0dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:orientation="horizontal">
-
-
-                <Button
-                    android:id="@+id/notas"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"
-                    android:adjustViewBounds="true"
-                    android:background="@drawable/btvermelhorect"
-                    android:text="NOTAS"
-
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/md_white_1000" />
-
-
-                <Button
-                    android:id="@+id/conteudo"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/btverderect"
-                    android:text="CONTEUDO"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/md_white_1000" />
-
-                <Button
-                    android:id="@+id/btprova"
-                    android:layout_width="140dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/botaoface"
-                    android:text="  QUESTIONARIO  "
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/md_white_1000" />
-
-            </LinearLayout>
+           >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/md_white_1000"
                 android:elevation="5dp">
 
 
@@ -101,28 +60,27 @@
                             android:adjustViewBounds="true"
                             android:cropToPadding="true"
                             fresco:actualImageScaleType="focusCrop"
-                            fresco:fadeDuration="500"/>
+                            fresco:fadeDuration="500" />
 
 
                     </FrameLayout>
-
 
 
                     <ead.app.br.com.appelite.ead.componets.CustonTextView
                         android:id="@+id/titulo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:layout_toLeftOf="@+id/donut_progress"
-                        android:layout_marginTop="10dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="5dp"
                         android:layout_marginEnd="10dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toLeftOf="@+id/donut_progress"
                         android:layout_toRightOf="@+id/contai"
                         android:ellipsize="end"
                         android:text="titulos"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
                         app:setFont="semi_bold" />
 
 
@@ -130,11 +88,11 @@
                         android:id="@+id/donut_progress"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:layout_marginRight="24dp"
-                        android:layout_marginEnd="24dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginRight="24dp"
                         custom:circle_finished_color="#ff0000"
                         custom:circle_progress="90"
                         custom:circle_text_color="@color/cardview_dark_background"
@@ -144,7 +102,61 @@
                 </RelativeLayout>
 
             </LinearLayout>
-        </com.daimajia.swipe.SwipeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/notas"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/btvermelhorect"
+                    android:text="NOTAS"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/md_white_1000" />
+
+
+                <Button
+                    android:id="@+id/conteudo"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/btverderect"
+                    android:text="CONTEUDO"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/md_white_1000" />
+
+                <Button
+                    android:id="@+id/btprova"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/botaoface"
+                    android:text="  QUESTIONARIO  "
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/md_white_1000" />
+
+            </LinearLayout>
+
+            </FrameLayout>
+
+
+        </com.silencedut.expandablelayout.ExpandableLayout>
     </RelativeLayout>
 
 

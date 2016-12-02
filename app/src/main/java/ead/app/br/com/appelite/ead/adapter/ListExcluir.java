@@ -30,8 +30,8 @@ public class ListExcluir extends BaseAdapter {
 
     public ListExcluir(Context context ) {
 
-        MenuExcluir menuExcluir = new MenuExcluir("",new IconicsDrawable(context).color(Color.GREEN).icon(CommunityMaterial.Icon.cmd_check).sizeDp(24));
-        MenuExcluir menuExcluir2 = new MenuExcluir("",new IconicsDrawable(context).color(Color.RED).icon(CommunityMaterial.Icon.cmd_close).sizeDp(24));
+        MenuExcluir menuExcluir = new MenuExcluir("SIM",new IconicsDrawable(context).color(Color.GREEN).icon(CommunityMaterial.Icon.cmd_check).sizeDp(24),Color.GREEN);
+        MenuExcluir menuExcluir2 = new MenuExcluir("NÃO",new IconicsDrawable(context).color(Color.RED).icon(CommunityMaterial.Icon.cmd_close).sizeDp(24),Color.RED);
         excluirs = new ArrayList();
         excluirs.add(menuExcluir);
         excluirs.add(menuExcluir2);
@@ -74,6 +74,7 @@ public class ListExcluir extends BaseAdapter {
 
         mydapter.icom.setImageDrawable(excluirs.get(position).getIcom());
         mydapter.texo.setText(excluirs.get(position).getTexto());
+        mydapter.texo.setTextColor(excluirs.get(position).getColor());
 
 
 
@@ -81,7 +82,7 @@ public class ListExcluir extends BaseAdapter {
         return convertView;
     }
 
-public static class MyAdapter {
+ private static class MyAdapter {
          TextView texo;
          ImageView icom;
 

@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -67,6 +68,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,6 +87,7 @@ import ead.app.br.com.appelite.ead.bd.Database;
 import ead.app.br.com.appelite.ead.bd.NetDados;
 import ead.app.br.com.appelite.ead.componets.AnomationFab;
 import ead.app.br.com.appelite.ead.componets.libs.MensageIcon;
+import ead.app.br.com.appelite.ead.fragments.Perfil;
 import ead.app.br.com.appelite.ead.fragments.Tabs;
 import ead.app.br.com.appelite.ead.interfaces.DadosVolley;
 import ead.app.br.com.appelite.ead.net.Config;
@@ -115,6 +118,7 @@ public class AtividadeTabs extends AppCompatActivity {
     private ImageButton imageButton;
     private FloatingActionButton menufab;
     private boolean framen = false;
+    private int user;
 
 
     @Override
@@ -125,7 +129,7 @@ public class AtividadeTabs extends AppCompatActivity {
         Fresco.initialize(this);
 
         if (isServiceRunning(PrograssService.class.getName() + "")) {
-            stopService(new Intent(this,PrograssService.class));
+            stopService(new Intent(this, PrograssService.class));
         }
 
 
@@ -390,17 +394,20 @@ public class AtividadeTabs extends AppCompatActivity {
                 new IconicsDrawable(this).icon(FontAwesome.Icon.faw_users).sizeDp(30).color(getResources().getColor(R.color.md_grey_600))).withIdentifier(159);
 
         item1 = new PrimaryDrawerItem().withBadge("32").withBadgeStyle(new BadgeStyle(Color.RED, Color.WHITE)).withName("Todos os Cursos").withIcon(
-                new IconicsDrawable(this).icon(MaterialDesignIconic.Icon.gmi_book).sizeDp(30).color(Color.LTGRAY));
+                new IconicsDrawable(this).icon(MaterialDesignIconic.Icon.gmi_book).sizeDp(30).color(Color.RED));
         item2 = new PrimaryDrawerItem().withBadge("12").withBadgeStyle(new BadgeStyle(Color.RED, Color.WHITE)).withName("Meus Cursos").withIcon(
-                new IconicsDrawable(this).icon(MaterialDesignIconic.Icon.gmi_book_image).sizeDp(30).color(Color.LTGRAY));
+                new IconicsDrawable(this).icon(MaterialDesignIconic.Icon.gmi_book_image).sizeDp(30).color(Color.MAGENTA));
 
 
         PrimaryDrawerItem item5 = new PrimaryDrawerItem().withName("Sobre").withIcon(
                 new IconicsDrawable(this).icon(FontAwesome.Icon.faw_wrench).sizeDp(30).color(Color.LTGRAY));
+        PrimaryDrawerItem item8 = new PrimaryDrawerItem().withName("Perfil").withIcon(
+                new IconicsDrawable(this).icon(MaterialDesignIconic.Icon.gmi_folder_person).sizeDp(30).color(Color.parseColor("#660033")));
+
         PrimaryDrawerItem item6 = new PrimaryDrawerItem().withName("Facebook").withIcon(
-                new IconicsDrawable(this).icon(MaterialDesignIconic.Icon.gmi_facebook_box).sizeDp(30).color(Color.LTGRAY));
+                new IconicsDrawable(this).icon(MaterialDesignIconic.Icon.gmi_facebook_box).sizeDp(30).color(Color.BLUE));
         PrimaryDrawerItem item7 = new PrimaryDrawerItem().withName("Site").withIcon(
-                new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_google_chrome).sizeDp(30).color(Color.LTGRAY));
+                new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_google_chrome).sizeDp(30).color(Color.YELLOW));
 
         drawer = new DrawerBuilder()
                 .withActivity(this)
@@ -412,7 +419,7 @@ public class AtividadeTabs extends AppCompatActivity {
                 .withFullscreen(true)
                 .withSavedInstance(savedInstanceState)
                 .addDrawerItems(new SectionDrawerItem().withName("Conteúdo").withDivider(true).withTextColor(Color.GRAY), item1, item2,
-                        new SectionDrawerItem().withName("Redes Sociais").withDivider(true).withTextColor(Color.GRAY), item6, item7, new SectionDrawerItem().withName("Configurações").withDivider(true).withTextColor(Color.GRAY), item5)
+                        new SectionDrawerItem().withName("Redes Sociais").withDivider(true).withTextColor(Color.GRAY), item6, item7, new SectionDrawerItem().withName("Configurações").withDivider(true).withTextColor(Color.GRAY), item8, item5)
                 .addStickyDrawerItems(login)
                 .withHasStableIds(true)
                 .build();
@@ -444,10 +451,10 @@ public class AtividadeTabs extends AppCompatActivity {
                 switch (position) {
 
                     case 2:
-                        if(framen){
+                        if (framen) {
                             framen = false;
                             AtividadeTabs.super.onBackPressed();
-                        }else {
+                        } else {
                             viewPager.setCurrentItem(0);
                         }
 
@@ -467,12 +474,25 @@ public class AtividadeTabs extends AppCompatActivity {
 
                         break;
 
-                    case 8:
+                    case 9:
                         MaterialDialog.Builder builder = new MaterialDialog.Builder(AtividadeTabs.this)
                                 .customView(R.layout.sobre, true);
 
                         MaterialDialog dialog = builder.build();
                         dialog.show();
+
+
+                        break;
+
+                    case 8:
+                        if (estado == true) {
+                            Intent intent = new Intent(AtividadeTabs.this, AtividadeContainer.class);
+                            intent.putExtra("fra", 4);
+                            startActivity(intent);
+                        } else {
+                            Snackbar.make(toolbar, " Você precisa estar logado", Snackbar.LENGTH_SHORT).show();
+
+                        }
 
 
                         break;
@@ -551,6 +571,49 @@ public class AtividadeTabs extends AppCompatActivity {
         super.onResume();
         AppEventsLogger.activateApp(this);
 
+        if (estado) {
+            getPheferencias();
+            HashMap<String, String> map = new HashMap<>();
+            map.put("id", user + "");
+            map.put("metodo", "aluno");
+            Conexao.Conexao(this, Config.DOMIONIO + "/php/request/perfil.php", map, new DadosVolley() {
+                @Override
+                public void geJsonObject(JSONObject jsonObject) {
+
+                    Log.i("LOG",jsonObject+"");
+
+                    JSONObject object = null;
+                    try {
+                        object = jsonObject.getJSONObject("0");
+                        if (object.getString("nome_completo").equals("null") || object.getString("nome_completo").length() == 0 ) {
+                            Snackbar.make(toolbar, "Verifique seus dados", Snackbar.LENGTH_INDEFINITE).setAction("OK!", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                    Intent intent = new Intent(AtividadeTabs.this, AtividadeContainer.class);
+                                    intent.putExtra("fra", 4);
+                                    startActivity(intent);
+
+                                }
+                            }).show();
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                @Override
+                public void ErrorVolley(String messege) {
+
+                    Snackbar.make(toolbar, "Erro na conexão", Snackbar.LENGTH_SHORT).show();
+
+
+                }
+            });
+        }
+
 
     }
 
@@ -623,12 +686,26 @@ public class AtividadeTabs extends AppCompatActivity {
                 GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
-
+                        final String email, name;
                         try {
                             final Profile profile1 = new Profile(response.getJSONObject().getString("id"), null, null, null, null, null);
-                            final String email = response.getJSONObject().getString("email");
+
+                            if (response.getJSONObject().has("email")) {
+                                email = response.getJSONObject().getString("email");
+                            } else {
+                                email = "seuemail@dominio.com";
+                            }
+
+                            if (response.getJSONObject().has("name")) {
+                                name = response.getJSONObject().getString("name");
+
+                            } else if (response.getJSONObject().has("last_name")) {
+                                name = response.getJSONObject().getString("last_name");
+                            } else {
+                                name = "Seu Nome";
+                            }
+
                             final String id = response.getJSONObject().getString("id");
-                            final String name = response.getJSONObject().getString("name");
                             JSONObject obg = response.getJSONObject();
                             final String urll = obg.getJSONObject("picture").getJSONObject("data").getString("url");
                             HashMap<String, String> map = new HashMap<String, String>();
@@ -700,7 +777,7 @@ public class AtividadeTabs extends AppCompatActivity {
 
     }
 
-    public void isfragment(boolean framen){
+    public void isfragment(boolean framen) {
         this.framen = framen;
     }
 
@@ -724,6 +801,7 @@ public class AtividadeTabs extends AppCompatActivity {
         email = preferences.getString("245", "");
         urlfato = preferences.getString("1454", "");
         estado = preferences.getBoolean("12", estado);
+        user = preferences.getInt("2454", 0);
     }
 
     public void loginApp() {
@@ -807,7 +885,7 @@ public class AtividadeTabs extends AppCompatActivity {
                             @Override
                             public void ErrorVolley(String messege) {
                                 Snackbar.make(toolbar, "Verifique sua Conexão com a Internet", Snackbar.LENGTH_SHORT).show();
-                                Log.i("LOG",messege);
+                                Log.i("LOG", messege);
 
                             }
                         });
@@ -849,7 +927,6 @@ public class AtividadeTabs extends AppCompatActivity {
             Button button = (Button) view.findViewById(R.id.closefb);
             AlertDialog.Builder dialogB = new AlertDialog.Builder(AtividadeTabs.this).setView(view);
             final AlertDialog dialog = dialogB.create();
-
 
 
             button.setOnClickListener(new View.OnClickListener() {
@@ -982,4 +1059,6 @@ public class AtividadeTabs extends AppCompatActivity {
         }
         return false;
     }
+
+
 }

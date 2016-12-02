@@ -68,7 +68,7 @@ public class Mensagem extends Fragment {
         if(mesagems.size() == 0){
             TextView textView = (TextView) view.findViewById(R.id.error);
             textView.setVisibility(View.VISIBLE);
-            textView.setCompoundDrawables(new IconicsDrawable(getActivity()).sizeDp(30).color(Color.BLACK).icon(CommunityMaterial.Icon.cmd_alert_circle),null,null,null);
+            textView.setCompoundDrawables(new IconicsDrawable(getActivity()).sizeDp(30).color(Color.LTGRAY).icon(CommunityMaterial.Icon.cmd_alert_circle),null,null,null);
             textView.setText("  Caixa de Entrada Vazia");
 
 
@@ -95,7 +95,7 @@ public class Mensagem extends Fragment {
                 ListExcluir excluir = new ListExcluir(getActivity());
                 final ListPopupWindow popupWindow = new ListPopupWindow(getActivity());
                 popupWindow.setAnchorView(view);
-                popupWindow.setWidth((int) (80 * scala + 0.5f));
+                popupWindow.setWidth((int) (120 * scala + 0.5f));
                 popupWindow.setAdapter(excluir);
                 popupWindow.setModal(true);
                 popupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -106,7 +106,9 @@ public class Mensagem extends Fragment {
                                 Database database1 = new Database(getActivity());
                                 database1.deleta(mesagems.get(positionn).getId());
                                 popupWindow.dismiss();
+                                mesagems.remove(positionn);
                                 mensagem.removeItem(positionn);
+
                                 break;
                         }
 

@@ -127,6 +127,7 @@ public class AdapterMensagem extends RecyclerView.Adapter<AdapterMensagem.Myview
 
     public void setExcluirClickMensage(OnClickMensage onClickMensage){
         excluir = onClickMensage;
+        notifyDataSetChanged();
 
     }
 

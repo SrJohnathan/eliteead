@@ -68,6 +68,7 @@
                 android:layout_marginTop="-32dp"
                 android:scaleType="center"
                 app:fabSize="mini"
+                android:visibility="gone"
                 app:backgroundTint="@color/md_purple_500"
                 app:elevation="4dp"
                 app:borderWidth="0dp"

@@ -164,7 +164,7 @@ public class Perfil extends Fragment implements View.OnClickListener {
 
                     if (!object.getString("idface").equals("null")) {
                         getPheferencias();
-                        String nomee = object.getString("nome_completo").equals("null") ? "" : object.getString("nome_completo");
+                        String nomee = object.getString("nome_completo").equals("null") || object.getString("nome_completo").equals("")  ? "" : object.getString("nome_completo");
                         String teler = object.getString("tele").equals("null") ? "" : object.getString("tele");
 
                         etnome.setText(nomee);
@@ -220,12 +220,14 @@ public class Perfil extends Fragment implements View.OnClickListener {
 
 
                     } else {
+
                         senha = object.getString("senha");
                         etnome.setText(object.getString("nome_completo"));
                         ettele.setText(object.getString("tele"));
                         etuser.setText(object.getString("username"));
                         etemail.setText(object.getString("email"));
-                        etsenha.setText(object.getString("senha"));
+                        etsenha.setText("......");
+                        progressDialog.hide();
                         Picasso.with(context).load(Config.DOMIONIO + "/php/server/image.php?metodo=aluno&id=" + iduser).into(new Target() {
                             @Override
                             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -255,7 +257,7 @@ public class Perfil extends Fragment implements View.OnClickListener {
                         btemail.setOnClickListener(Perfil.this);
                         btnome.setOnClickListener(Perfil.this);
                         bttele.setOnClickListener(Perfil.this);
-                        progressDialog.hide();
+
                         btbuscar.setOnClickListener(Perfil.this);
                         etsenha.setEnabled(false);
                     }
