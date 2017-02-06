@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.barteksc.pdfviewer.PDFView;
@@ -102,7 +103,7 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
             @Override
             public void geJsonObject(JSONObject jsonObject) {
 
-
+                Log.i("LOG", jsonObject + "");
 
                 for (int i = 0; i < jsonObject.length(); i++) {
                     try {
@@ -116,9 +117,9 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
                             String sku = object.getString("sku");
                             String data = object.getString("dataf");
                             String hora = object.getString("hora");
-                            boolean baixou = object.getBoolean("baixou");
 
-                            Certificados certificados = new Certificados(id, nome, nota, hora, pago, sku, datap, data, baixou);
+
+                            Certificados certificados = new Certificados(id, nome, nota, hora, pago, sku, datap, data, false);
                             list.add(certificados);
                         } else if (object.has("nada")) {
                             connection.setText("  " + object.getString("nada"));
@@ -200,7 +201,7 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
 
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),LinearLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
 
         LinearLayoutManager lln = new LinearLayoutManager(getActivity());
         lln.setOrientation(LinearLayoutManager.VERTICAL);
@@ -332,16 +333,12 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
         super.onStart();
 
 
-
-
-
     }
 
 
     @Override
     public void onStop() {
         super.onStop();
-
 
 
     }
@@ -358,12 +355,11 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
                 @Override
                 public void geJsonObject(JSONObject jsonObject) {
 
-                    Log.i("LOG",jsonObject+"");
 
                     JSONObject object = null;
                     try {
                         object = jsonObject.getJSONObject("0");
-                        if (object.getString("nome_completo").equals("null") || object.getString("nome_completo").length() == 0 ) {
+                        if (object.getString("nome_completo").equals("null") || object.getString("nome_completo").length() == 0) {
                             Snackbar.make(view, "Verifique seus dados", Snackbar.LENGTH_INDEFINITE).setAction("OK!", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
@@ -375,7 +371,7 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
                                 }
                             }).show();
 
-                        }else {
+                        } else {
 
                             if (list.get(position).isPago()) {
 
@@ -387,7 +383,6 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
 
 
                             } else {
-
 
 
                                 final IabHelper abHelper = new IabHelper(getActivity(), Config.base64EncodedPublicKey);
@@ -409,25 +404,34 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
 
                                                     if (result.isFailure()) {
 
-
                                                         return;
 
                                                     } else {
 
-                                                        if (info.getSku().equals(skss.get(position))) {
 
+                                                        String url = Config.DOMIONIO + "/php/pdf/pdf.php?certi=854125896589&curso=" + list.get(position).getId() + "&user=" + iduser + "&inden=" + info.getToken();
+                                                        GetDownloads downloads = new GetDownloads(getActivity(), url, "Certificado"
+                                                                , "Certificado do Curso " + list.get(position).getNome(), list.get(position).getNome());
+                                                        downloads.downloadManager();
 
-                                                            String url = Config.DOMIONIO + "/php/pdf/pdf.php?certi=854125896589&curso=" + list.get(position).getId() + "&user=" + iduser + "&inden"+info.getToken();
-                                                            GetDownloads downloads = new GetDownloads(getActivity(), url, "Certificado"
-                                                                    , "Certificado do Curso " + list.get(position).getNome(), list.get(position).getNome());
-                                                            downloads.downloadManager();
+                                                        abHelper.consumeAsync(info, new IabHelper.OnConsumeFinishedListener() {
+                                                            @Override
+                                                            public void onConsumeFinished(Purchase purchase, IabResult result) {
 
+                                                                if (result.isFailure()) {
+                                                                    return;
 
-                                                        }
+                                                                } else {
+                                                                    Toast.makeText(getActivity(), "Produto comprado com sucesso.", Toast.LENGTH_SHORT).show();
+                                                                }
+
+                                                            }
+                                                        });
+
 
                                                     }
                                                 }
-                                            },RandomAlphaNumeric.randomString(17));
+                                            }, RandomAlphaNumeric.randomString(17));
 
 
                                         }
@@ -453,8 +457,6 @@ public class Certificado extends Fragment implements AdapterCertificado.GetClick
                 }
             });
         }
-
-
 
 
     }

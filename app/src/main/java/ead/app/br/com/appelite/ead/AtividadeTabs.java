@@ -884,8 +884,10 @@ public class AtividadeTabs extends AppCompatActivity {
 
                             @Override
                             public void ErrorVolley(String messege) {
+                                progressDialog.hide();
                                 Snackbar.make(toolbar, "Verifique sua Conexão com a Internet", Snackbar.LENGTH_SHORT).show();
-                                Log.i("LOG", messege);
+
+
 
                             }
                         });
@@ -1007,7 +1009,7 @@ public class AtividadeTabs extends AppCompatActivity {
         Conexao.Conexao(this, Config.DOMIONIO + "/php/request/getcategoria.php", null, new DadosVolley() {
             @Override
             public void geJsonObject(JSONObject jsonObject) {
-                Log.i("LOG", jsonObject + "");
+
                 ArrayList<String> strings = new ArrayList<String>();
                 strings.add("TODOS OS CURSOS");
                 strings.add("CATEGORIAS");

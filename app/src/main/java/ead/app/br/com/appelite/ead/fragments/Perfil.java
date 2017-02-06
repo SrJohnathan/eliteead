@@ -270,6 +270,7 @@ public class Perfil extends Fragment implements View.OnClickListener {
 
             @Override
             public void ErrorVolley(String messege) {
+                getActivity().onBackPressed();
                 progressDialog.hide();
                 Snackbar.make(view, "Erro na conexão", Snackbar.LENGTH_SHORT).show();
 

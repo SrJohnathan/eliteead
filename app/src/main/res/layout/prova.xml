@@ -60,14 +60,28 @@
             android:title="ggggg"
             android:background="@color/md_light_blue_600"
             android:minHeight="?attr/actionBarSize"
-            app:theme="@style/Theme.AppCompat.NoActionBar"/>
+            app:theme="@style/Theme.AppCompat.NoActionBar">
+
+            <ead.app.br.com.appelite.ead.componets.CustonTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sua Nota"
+                android:textSize="24sp"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                android:visibility="gone"
+                android:id="@+id/nota"
+                android:layout_gravity="center|end"
+                />
+
+        </android.support.v7.widget.Toolbar>
 
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyprova"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/frame" />
+            />
 
 
     </LinearLayout>

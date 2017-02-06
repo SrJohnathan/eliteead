@@ -110,6 +110,7 @@ public class Mensagem extends Fragment {
                                 mensagem.removeItem(positionn);
 
                                 break;
+                            case  1 : popupWindow.dismiss(); break;
                         }
 
                     }

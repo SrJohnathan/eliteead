@@ -39,6 +39,7 @@ import java.util.regex.Pattern;
 
 import ead.app.br.com.appelite.ead.adapter.AdapterProvas;
 import ead.app.br.com.appelite.ead.bd.Dados;
+import ead.app.br.com.appelite.ead.componets.CustonTextView;
 import ead.app.br.com.appelite.ead.dominio.Acerto;
 import ead.app.br.com.appelite.ead.dominio.Buscaprova;
 import ead.app.br.com.appelite.ead.dominio.PosicaoRes;
@@ -71,6 +72,7 @@ public class Prova extends AppCompatActivity implements OnClickItemProva {
     private Toolbar toolbar;
     private String[] quest;
     private int nota;
+    private CustonTextView notasalu;
 
 
     @Override
@@ -83,6 +85,7 @@ public class Prova extends AppCompatActivity implements OnClickItemProva {
 
         //IDS
         contador = (TextView) findViewById(R.id.contador);
+        notasalu = (CustonTextView) findViewById(R.id.nota);
         toolbar = (Toolbar) findViewById(R.id.toobarPai);
         toolbar.setTitle(buscaprova.getProva());
 
@@ -463,7 +466,8 @@ public class Prova extends AppCompatActivity implements OnClickItemProva {
                     estados.add(estado);
 
                 }
-
+                notasalu.setText( "Sua Nota:"+String.valueOf(nota));
+                notasalu.setVisibility(View.VISIBLE);
                 acerto.setQuestao(estados);
                 adapterProvas = (AdapterProvas) recyclerView.getAdapter();
                 adapterProvas.setAcerto(acerto, posicaoRes);

@@ -46,6 +46,7 @@ import ead.app.br.com.appelite.ead.dominio.Conteudo;
 import ead.app.br.com.appelite.ead.interfaces.DadosVolley;
 import ead.app.br.com.appelite.ead.net.Config;
 import ead.app.br.com.appelite.ead.net.volley.Conexao;
+import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -71,6 +72,7 @@ public class ConteudoFrag extends Fragment implements AdapterConteudo.OpemDrawer
     private Conteudo conteudo;
     private MaterialDialog dialog;
     private Snackbar snackbar;
+    private MaterialProgressBar progressBar;
 
 
 
@@ -91,6 +93,7 @@ public class ConteudoFrag extends Fragment implements AdapterConteudo.OpemDrawer
         menufab = (FloatingActionButton) getActivity().findViewById(R.id.menufab);
         menufab2 = (FloatingActionButton) view.findViewById(R.id.menufab);
         scrollView = (NestedScrollView) view.findViewById(R.id.scroll);
+        progressBar = (MaterialProgressBar) getActivity().findViewById(R.id.progcon);
 
 
         setHasOptionsMenu(true);
@@ -105,6 +108,7 @@ public class ConteudoFrag extends Fragment implements AdapterConteudo.OpemDrawer
         conteudo = getActivity().getIntent().getParcelableExtra("conteudo");
 
         recyclerView.setHasFixedSize(true);
+        recyclerView.setItemViewCacheSize(11);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
@@ -129,11 +133,20 @@ public class ConteudoFrag extends Fragment implements AdapterConteudo.OpemDrawer
     }
 
     public void preencher(final Capitulos capitulos) {
+
+
+
         String webContent = "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><link href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7\" crossorigin=\"anonymous\"></head>"
                 + "<body style=\" width: 100%;\"><div class=\"container\">  <h2 style=\" margin-left:30px;\">" + capitulos.getNome() + "</h2> <br> <br> " + capitulos.getTexto1() + " </h2> <br> <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\" integrity=\"sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS\" crossorigin=\"anonymous\"></script> <script   src=\"https://code.jquery.com/jquery-2.2.3.js\"   integrity=\"sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=\"   crossorigin=\"anonymous\"></script>" +
+                " <script src=https://cdnjs.cloudflare.com/ajax/libs/unveil/1.3.0/jquery.unveil.min.js type=\"text/javascript\"></script>" +
+
                 "<script>$(document).ready(function(){\n" +
                 "            $(\"img\").addClass(\"img-responsive\");\n" +
-                "    });\n</script></div></body></html>";
+                " $(\"img\").unveil();" +
+                "    });\n " +
+                "" +
+                "</script>" +
+                "</div></body></html>";
         scrollView.scrollTo(0, 0);
         webView.loadData(webContent, "text/html", "UTF-8");
         webView.setWebViewClient(new WebViewClient() {
@@ -224,7 +237,7 @@ public class ConteudoFrag extends Fragment implements AdapterConteudo.OpemDrawer
 
             @Override
             public void ErrorVolley(String messege) {
-                Log.i("LOG", messege);
+
                 dialog.dismiss();
                 Snackbar.make(view,"Erro na conexão com a internet",Snackbar.LENGTH_SHORT).show();
             }
@@ -276,13 +289,15 @@ public class ConteudoFrag extends Fragment implements AdapterConteudo.OpemDrawer
                 adapterConteudo = new AdapterConteudo(getActivity(), capitulosArrayList);
                 recyclerView.setAdapter(adapterConteudo);
                 adapterConteudo.setOpemDrawer(ConteudoFrag.this);
-
+                progressBar.setVisibility(View.GONE);
 
             }
 
             @Override
             public void ErrorVolley(String messege) {
-                Log.i("LOG", messege);
+                progressBar.setVisibility(View.GONE);
+
+
               snackbar =  Snackbar.make(view, "Verifique sua Conexão", Snackbar.LENGTH_INDEFINITE).setAction("CONFIG", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -370,7 +385,7 @@ public class ConteudoFrag extends Fragment implements AdapterConteudo.OpemDrawer
                 super.onDrawerClosed(drawerView);
                 menufab.hide();
                 ((Coneudo)getActivity()).naomostrarbt();
-                getActivity().setTitle("Conteúdos");
+
 
 
             }
@@ -380,7 +395,7 @@ public class ConteudoFrag extends Fragment implements AdapterConteudo.OpemDrawer
                 super.onDrawerOpened(drawerView);
                 menufab.show();
                 ((Coneudo)getActivity()).mostrarbt();
-                toolbar.setSubtitle("Capitulos");
+
 
 
             }
